@@ -4,6 +4,7 @@ type hashSet struct {
 	m map[int]struct{}
 }
 
+// NewHashSet returns a new hash set with the given elements added to it.
 func NewHashSet(items ...int) Interface {
 	newSet := &hashSet{
 		m: nil,
