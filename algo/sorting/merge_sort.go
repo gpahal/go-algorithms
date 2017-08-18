@@ -30,19 +30,19 @@ func MergeSort(arr []int) {
 	for {
 		if tmpArr[left] <= arr[right] {
 			arr[idx] = tmpArr[left]
-			left += 1
+			left++
 			if left == mid {
 				break
 			}
 		} else {
 			arr[idx] = arr[right]
-			right += 1
+			right++
 			if right == arrLength {
 				copy(arr[idx+1:], tmpArr[left:mid])
 				break
 			}
 		}
 
-		idx += 1
+		idx++
 	}
 }

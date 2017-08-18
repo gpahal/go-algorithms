@@ -20,12 +20,12 @@ func QuickSort(arr []int) {
 
 	// Partition the slice.
 	i := 0
-	for j := 0; j < lastIdx; j += 1 {
+	for j := 0; j < lastIdx; j++ {
 		if arr[j] <= pivotVal {
 			if i != j {
 				arr[i], arr[j] = arr[j], arr[i]
 			}
-			i += 1
+			i++
 		}
 	}
 	if i != lastIdx {

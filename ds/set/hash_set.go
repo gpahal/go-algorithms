@@ -32,7 +32,7 @@ func (hs *hashSet) Values() []int {
 	idx := 0
 	for item := range hs.m {
 		items[idx] = item
-		idx += 1
+		idx++
 	}
 
 	return items
@@ -113,7 +113,7 @@ func (hsi *hashSetIterable) Next() bool {
 		return false
 	}
 
-	hsi.currentIdx += 1
+	hsi.currentIdx++
 	return true
 }
 

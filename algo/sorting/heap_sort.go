@@ -12,12 +12,12 @@ func HeapSort(arr []int) {
 	}
 
 	// Build the heap.
-	for i := arrLength/2 - 1; i >= 0; i -= 1 {
+	for i := arrLength/2 - 1; i >= 0; i-- {
 		heapify(arr, arrLength, i)
 	}
 
 	// Extract max values one by one, place them at the end and build the heap again.
-	for i := arrLength - 1; i >= 0; i -= 1 {
+	for i := arrLength - 1; i >= 0; i-- {
 		arr[0], arr[i] = arr[i], arr[0]
 		heapify(arr, i, 0)
 	}
