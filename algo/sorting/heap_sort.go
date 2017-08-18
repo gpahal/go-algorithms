@@ -1,5 +1,6 @@
 package sorting
 
+// HeapSort sorts the slice in-place using the heap sort algorithm.
 func HeapSort(arr []int) {
 	arrLength := len(arr)
 	if arrLength <= 2 {

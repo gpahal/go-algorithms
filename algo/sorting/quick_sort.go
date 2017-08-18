@@ -1,5 +1,6 @@
 package sorting
 
+// QuickSort sorts the slice in-place using the quick sort algorithm.
 func QuickSort(arr []int) {
 	arrLength := len(arr)
 	if arrLength <= 2 {

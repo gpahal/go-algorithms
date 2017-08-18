@@ -1,5 +1,6 @@
 package sorting
 
+// MergeSort sorts the slice in-place using the merge sort algorithm.
 func MergeSort(arr []int) {
 	arrLength := len(arr)
 	if arrLength <= 2 {
