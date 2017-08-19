@@ -27,7 +27,7 @@ func generateRandSlice(length int) []int {
 
 func assertSortFn(t *testing.T, name string, fn func([]int)) bool {
 	for i := 0; i < 10; i += 1 {
-		length := (rand.Int() % 50) + 1
+		length := (rand.Int() % 20) + 1
 		original := generateRandSlice(length)
 		sorted := make([]int, length)
 		copy(sorted, original)
