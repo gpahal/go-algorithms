@@ -11,6 +11,22 @@ func QuickSort(arr []int) {
 		return
 	}
 
+	// Partition the slice.
+	partitionIdx := partition(arr)
+
+	// Recursively sort the two partitions.
+	if partitionIdx < arrLength>>1 {
+		QuickSort(arr[:partitionIdx])
+		QuickSort(arr[partitionIdx+1:])
+	} else {
+		QuickSort(arr[partitionIdx+1:])
+		QuickSort(arr[:partitionIdx])
+	}
+}
+
+func partition(arr []int) int {
+	arrLength := len(arr)
+
 	// Choose the middle element as the pivot.
 	lastIdx := arrLength - 1
 	pivotIdx := arrLength >> 1
@@ -33,7 +49,5 @@ func QuickSort(arr []int) {
 		arr[i], arr[lastIdx] = pivotVal, arr[i]
 	}
 
-	// Recursively sort the two partitions.
-	QuickSort(arr[:i])
-	QuickSort(arr[i+1:])
+	return i
 }
