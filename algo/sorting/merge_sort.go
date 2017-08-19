@@ -16,10 +16,16 @@ func MergeSort(arr []int) {
 	MergeSort(arr[:mid])
 	MergeSort(arr[mid:])
 
+	merge(arr, mid)
+}
+
+func merge(arr []int, mid int) {
 	// Check if merge is required.
 	if arr[mid-1] <= arr[mid] {
 		return
 	}
+
+	arrLength := len(arr)
 
 	// Temporary slice to remember the first half of the original slice.
 	tmpArr := make([]int, mid)
