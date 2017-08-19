@@ -25,6 +25,7 @@ func QuickSort(arr []int) {
 			if i != j {
 				arr[i], arr[j] = arr[j], arr[i]
 			}
+
 			i++
 		}
 	}

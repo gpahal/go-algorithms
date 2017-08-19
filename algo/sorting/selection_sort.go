@@ -26,9 +26,7 @@ func SelectionSort(arr []int) {
 
 		// Check if the minimum element in not a[i]. If not, swap the minimum element with the ith element.
 		if minIdx != i {
-			tmp := arr[i]
-			arr[i] = minVal
-			arr[minIdx] = tmp
+			arr[i], arr[minIdx] = minVal, arr[i]
 		}
 	}
 }
