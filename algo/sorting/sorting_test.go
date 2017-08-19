@@ -69,6 +69,7 @@ func TestHeapSort(t *testing.T) {
 
 func benchmarkSortFn(b *testing.B, fn func([]int), length int) {
 	arr := generateRandSlice(length)
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		fn(arr)
 	}
