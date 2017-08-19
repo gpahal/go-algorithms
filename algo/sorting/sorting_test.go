@@ -74,6 +74,18 @@ func benchmarkSortFn(b *testing.B, fn func([]int), length int) {
 	}
 }
 
+func BenchmarkBubbleSort_10000(b *testing.B) {
+	benchmarkSortFn(b, sorting.BubbleSort, 10000)
+}
+
+func BenchmarkInsertionSort_10000(b *testing.B) {
+	benchmarkSortFn(b, sorting.InsertionSort, 10000)
+}
+
+func BenchmarkSelectionSort_10000(b *testing.B) {
+	benchmarkSortFn(b, sorting.SelectionSort, 10000)
+}
+
 func BenchmarkQuickSort_10000(b *testing.B) {
 	benchmarkSortFn(b, sorting.QuickSort, 10000)
 }
