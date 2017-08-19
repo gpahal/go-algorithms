@@ -60,6 +60,10 @@ func TestQuickSort(t *testing.T) {
 	assertSortFn(t, "QuickSort", sorting.QuickSort)
 }
 
+func TestQuickSortIterative(t *testing.T) {
+	assertSortFn(t, "QuickSortIterative", sorting.QuickSortIterative)
+}
+
 func TestMergeSort(t *testing.T) {
 	assertSortFn(t, "MergeSort", sorting.MergeSort)
 }
@@ -90,6 +94,10 @@ func BenchmarkSelectionSort_10000(b *testing.B) {
 
 func BenchmarkQuickSort_10000(b *testing.B) {
 	benchmarkSortFn(b, sorting.QuickSort, 10000)
+}
+
+func BenchmarkQuickSortIterative_10000(b *testing.B) {
+	benchmarkSortFn(b, sorting.QuickSortIterative, 10000)
 }
 
 func BenchmarkMergeSort_10000(b *testing.B) {

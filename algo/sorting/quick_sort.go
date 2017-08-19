@@ -24,6 +24,35 @@ func QuickSort(arr []int) {
 	}
 }
 
+// QuickSortIterative sorts the slice in-place using the quick sort iterative algorithm.
+func QuickSortIterative(arr []int) {
+	arrLength := len(arr)
+	if arrLength <= 1 {
+		return
+	}
+
+	stack := make([][]int, 0, (arrLength+1)<<1)
+	stack = append(stack, arr)
+
+	// Iterate over each stack element.
+	for len(stack) > 0 {
+		topIdx := len(stack) - 1
+		currArr := stack[topIdx]
+		stack = stack[:topIdx]
+
+		// Partition the current slice.
+		partitionIdx := partition(currArr)
+
+		// Add the two partitions to the stack.
+		if partitionIdx > 1 {
+			stack = append(stack, currArr[:partitionIdx])
+		}
+		if partitionIdx < len(currArr)-2 {
+			stack = append(stack, currArr[partitionIdx+1:])
+		}
+	}
+}
+
 func partition(arr []int) int {
 	arrLength := len(arr)
 
