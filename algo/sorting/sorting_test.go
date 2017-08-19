@@ -19,7 +19,7 @@ func generateRandSlice(length int) []int {
 
 	arr := make([]int, length)
 	for i := 0; i < length; i += 1 {
-		arr[i] = rand.Int()
+		arr[i] = (rand.Int() % 50) + 1 // random number in the range 1..50
 	}
 
 	return arr
