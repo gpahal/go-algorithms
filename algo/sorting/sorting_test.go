@@ -27,12 +27,13 @@ func generateRandSlice(length int) []int {
 
 func assertSortFn(t *testing.T, name string, fn func([]int)) bool {
 	for i := 0; i < 10; i += 1 {
-		original := generateRandSlice(20)
-		sorted := make([]int, 20)
+		length := (rand.Int() % 50) + 1
+		original := generateRandSlice(length)
+		sorted := make([]int, length)
 		copy(sorted, original)
 		fn(sorted)
 
-		for j := 0; j < 19; j += 1 {
+		for j := 0; j < length-1; j += 1 {
 			if sorted[j] > sorted[j+1] {
 				t.Errorf("%s %v: got %v (%d > %d)", name, original, sorted, sorted[j], sorted[j+1])
 				return false
