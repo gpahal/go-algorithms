@@ -43,6 +43,10 @@ func assertSortFn(t *testing.T, name string, fn func([]int)) bool {
 	return true
 }
 
+func TestInsertionSort(t *testing.T) {
+	assertSortFn(t, "InsertionSort", sorting.InsertionSort)
+}
+
 func TestQuickSort(t *testing.T) {
 	assertSortFn(t, "QuickSort", sorting.QuickSort)
 }
