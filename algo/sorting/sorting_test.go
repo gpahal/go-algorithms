@@ -47,6 +47,10 @@ func TestInsertionSort(t *testing.T) {
 	assertSortFn(t, "InsertionSort", sorting.InsertionSort)
 }
 
+func TestSelectionSortSort(t *testing.T) {
+	assertSortFn(t, "SelectionSort", sorting.SelectionSort)
+}
+
 func TestQuickSort(t *testing.T) {
 	assertSortFn(t, "QuickSort", sorting.QuickSort)
 }
