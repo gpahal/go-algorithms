@@ -3,11 +3,7 @@ package sorting
 // InsertionSort sorts the slice in-place using the insertion sort algorithm.
 func InsertionSort(arr []int) {
 	arrLength := len(arr)
-	if arrLength <= 2 {
-		if arrLength == 2 && arr[0] > arr[1] {
-			arr[0], arr[1] = arr[1], arr[0]
-		}
-
+	if arrLength <= 1 {
 		return
 	}
 
