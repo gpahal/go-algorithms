@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/gpahal/go-algorithms/algo/searching"
+	"github.com/gpahal/go-algorithms/algo/sorting"
 )
 
 func init() {
@@ -26,35 +27,26 @@ func generateRandSlice(length int) []int {
 }
 
 func checkSearchResult(arr []int, key, idx int) (bool, int) {
-	if len(arr) < idx+1 {
+	if idx < 0 || len(arr) <= idx || arr[idx] != key {
 		for i, el := range arr {
 			if el == key {
 				return false, i
 			}
 		}
 
-		return false, -1
-	}
-
-	if idx >= 0 {
-		if arr[idx] != key {
-			return false, -1
-		}
-	} else {
-		for i, el := range arr {
-			if el == key {
-				return false, i
-			}
-		}
+		return idx < 0, -1
 	}
 
 	return true, idx
 }
 
-func assertSearchFn(t *testing.T, name string, fn func([]int, int) int) bool {
+func assertSearchFn(t *testing.T, name string, fn func([]int, int) int, sort bool) bool {
 	for i := 0; i < 10; i += 1 {
 		length := (rand.Int() % 20) + 1
 		arr := generateRandSlice(length)
+		if sort {
+			sorting.QuickSort(arr)
+		}
 
 		var key int
 		if i == 5 {
@@ -77,5 +69,9 @@ func assertSearchFn(t *testing.T, name string, fn func([]int, int) int) bool {
 }
 
 func TestLinearSearch(t *testing.T) {
-	assertSearchFn(t, "LinearSearch", searching.LinearSearch)
+	assertSearchFn(t, "LinearSearch", searching.LinearSearch, false)
+}
+
+func TestBinarySearch(t *testing.T) {
+	assertSearchFn(t, "BinarySearch", searching.BinarySearch, true)
 }
