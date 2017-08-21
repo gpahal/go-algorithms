@@ -19,9 +19,36 @@ func MergeSort(arr []int) {
 	merge(arr, mid)
 }
 
+// MergeSortIterative sorts the slice in-place using the merge sort iterative algorithm.
+func MergeSortIterative(arr []int) {
+	arrLength := len(arr)
+	if arrLength <= 1 {
+		return
+	}
+
+	// Merge sorted slices bottom up, starting from single element slices.
+	currSize := 1
+	for currSize < arrLength {
+		doubleCurrSize := currSize << 1
+
+		// Loop over the whole slice in steps of doubleCurrSize and merge the two consecutive sorted slices of size
+		// currSize.
+		for startIdx := 0; startIdx+currSize < arrLength; startIdx += doubleCurrSize {
+			endIdxExtended := startIdx + doubleCurrSize
+			if endIdxExtended > arrLength {
+				endIdxExtended = arrLength
+			}
+
+			merge(arr[startIdx:endIdxExtended], currSize)
+		}
+
+		currSize = doubleCurrSize
+	}
+}
+
 func merge(arr []int, mid int) {
 	// Check if merge is required.
-	if arr[mid-1] <= arr[mid] {
+	if len(arr) < 2 || arr[mid-1] <= arr[mid] {
 		return
 	}
 
