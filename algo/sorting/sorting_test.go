@@ -77,10 +77,15 @@ func TestHeapSort(t *testing.T) {
 }
 
 func benchmarkSortFn(b *testing.B, fn func([]int), length int) {
+	b.StopTimer()
 	arr := generateRandSlice(length)
-	b.ResetTimer()
+	copyArr := make([]int, length)
+
 	for i := 0; i < b.N; i++ {
-		fn(arr)
+		copy(copyArr, arr)
+		b.StartTimer()
+		fn(copyArr)
+		b.StopTimer()
 	}
 }
 
