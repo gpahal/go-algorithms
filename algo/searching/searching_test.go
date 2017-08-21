@@ -40,12 +40,6 @@ func checkSearchResult(arr []int, key, idx int) (bool, int) {
 		if arr[idx] != key {
 			return false, -1
 		}
-
-		for i := 0; i < idx; i++ {
-			if arr[i] == key {
-				return false, i
-			}
-		}
 	} else {
 		for i, el := range arr {
 			if el == key {
