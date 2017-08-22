@@ -8,7 +8,7 @@ type Interface interface {
 	// Empty checks whether the set is empty.
 	Empty() bool
 
-	// Clear removes all the items from the set.
+	// Clear deletes all the items from the set.
 	Clear()
 
 	// Values returns a slice of the items of the set.
@@ -23,8 +23,8 @@ type Interface interface {
 	// Add adds the given items to the set.
 	Add(items ...int)
 
-	// Remove removes the given items from the set.
-	Remove(items ...int)
+	// Delete deletes the given items from the set.
+	Delete(items ...int)
 
 	// Contains checks whether the set contains all the given items.
 	Contains(items ...int) bool
@@ -112,20 +112,20 @@ func MergeInto(mainSet, otherSet Interface) {
 	mainSet.Add(otherSet.Values()...)
 }
 
-// RetainOnly removes all the items from the first set that are not in the second.
+// RetainOnly deletes all the items from the first set that are not in the second.
 func RetainOnly(mainSet, otherSet Interface) {
 	mainSet.Each(func(item int) bool {
 		if !otherSet.Contains(item) {
-			mainSet.Remove(item)
+			mainSet.Delete(item)
 		}
 
 		return false
 	})
 }
 
-// SeparateFrom removes all the items from the first set that are also in the second.
+// SeparateFrom deletes all the items from the first set that are also in the second.
 func SeparateFrom(mainSet, otherSet Interface) {
-	mainSet.Remove(otherSet.Values()...)
+	mainSet.Delete(otherSet.Values()...)
 }
 
 // Union returns a new set which is a union of the given sets. If no sets are provided, an empty set is returned.

@@ -63,7 +63,7 @@ func (hs *HashSet) Add(items ...int) {
 	}
 }
 
-func (hs *HashSet) Remove(items ...int) {
+func (hs *HashSet) Delete(items ...int) {
 	if hs.m == nil {
 		return
 	}

@@ -36,9 +36,9 @@ func TestInterface(t *testing.T) {
 		t.Errorf("Add 5, 7, 9, 11, -4: expected Size to be 5, got %d", newSet.Size())
 	}
 
-	newSet.Remove(5, 7, 13)
+	newSet.Delete(5, 7, 13)
 	if newSet.Size() != 3 {
-		t.Errorf("Remove 5, 7, 13: expected Size to be 3, got %d", newSet.Size())
+		t.Errorf("Delete 5, 7, 13: expected Size to be 3, got %d", newSet.Size())
 	}
 
 	if !newSet.Contains(-4, 9) {
