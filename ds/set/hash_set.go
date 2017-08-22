@@ -1,12 +1,12 @@
 package set
 
-type hashSet struct {
+type HashSet struct {
 	m map[int]struct{}
 }
 
 // NewHashSet returns a new hash set with the given elements added to it.
 func NewHashSet(items ...int) Interface {
-	newSet := &hashSet{
+	newSet := &HashSet{
 		m: nil,
 	}
 
@@ -14,19 +14,19 @@ func NewHashSet(items ...int) Interface {
 	return newSet
 }
 
-func (hs *hashSet) Size() int {
+func (hs *HashSet) Size() int {
 	return len(hs.m)
 }
 
-func (hs *hashSet) Empty() bool {
+func (hs *HashSet) Empty() bool {
 	return len(hs.m) == 0
 }
 
-func (hs *hashSet) Clear() {
+func (hs *HashSet) Clear() {
 	hs.m = nil
 }
 
-func (hs *hashSet) Values() []int {
+func (hs *HashSet) Values() []int {
 	items := make([]int, len(hs.m))
 
 	idx := 0
@@ -38,7 +38,7 @@ func (hs *hashSet) Values() []int {
 	return items
 }
 
-func (hs *hashSet) Each(fn func(int) bool) {
+func (hs *HashSet) Each(fn func(int) bool) {
 	for item := range hs.m {
 		if fn(item) {
 			break
@@ -46,14 +46,14 @@ func (hs *hashSet) Each(fn func(int) bool) {
 	}
 }
 
-func (hs *hashSet) Iterator() Iterable {
+func (hs *HashSet) Iterator() Iterable {
 	return &hashSetIterable{
 		values:     hs.Values(),
 		currentIdx: -1,
 	}
 }
 
-func (hs *hashSet) Add(items ...int) {
+func (hs *HashSet) Add(items ...int) {
 	if hs.m == nil {
 		hs.m = make(map[int]struct{}, len(items))
 	}
@@ -63,7 +63,7 @@ func (hs *hashSet) Add(items ...int) {
 	}
 }
 
-func (hs *hashSet) Remove(items ...int) {
+func (hs *HashSet) Remove(items ...int) {
 	if hs.m == nil {
 		return
 	}
@@ -73,7 +73,7 @@ func (hs *hashSet) Remove(items ...int) {
 	}
 }
 
-func (hs *hashSet) Contains(items ...int) bool {
+func (hs *HashSet) Contains(items ...int) bool {
 	if hs.m == nil {
 		return len(items) == 0
 	}
@@ -89,7 +89,7 @@ func (hs *hashSet) Contains(items ...int) bool {
 	return true
 }
 
-func (hs *hashSet) Copy() Interface {
+func (hs *HashSet) Copy() Interface {
 	var m map[int]struct{}
 	if hs.m != nil {
 		m = make(map[int]struct{}, len(hs.m))
@@ -98,7 +98,7 @@ func (hs *hashSet) Copy() Interface {
 		}
 	}
 
-	return &hashSet{
+	return &HashSet{
 		m: m,
 	}
 }
