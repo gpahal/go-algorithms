@@ -2,31 +2,31 @@ package set
 
 // Interface is the interface that groups the basic methods of a set implementation.
 type Interface interface {
-	// Size returns the number of elements in the set.
+	// Size returns the number of items in the set.
 	Size() int
 
 	// Empty checks whether the set is empty.
 	Empty() bool
 
-	// Clear removes all the elements from the set.
+	// Clear removes all the items from the set.
 	Clear()
 
-	// Values returns a slice of the elements of the set.
+	// Values returns a slice of the items of the set.
 	Values() []int
 
-	// Each iterates over the elements of the set.
+	// Each iterates over the items of the set.
 	Each(fn func(int) bool)
 
 	// Iterator returns a set.Iterable that can be used to iterate over the set.
 	Iterator() Iterable
 
-	// Add adds the given elements to the set.
+	// Add adds the given items to the set.
 	Add(items ...int)
 
-	// Remove removes the given elements from the set.
+	// Remove removes the given items from the set.
 	Remove(items ...int)
 
-	// Contains checks whether the set contains all the given elements.
+	// Contains checks whether the set contains all the given items.
 	Contains(items ...int) bool
 
 	// Copy creates a new copy of the set.
@@ -35,17 +35,17 @@ type Interface interface {
 
 // Iterable is the interface that groups the Next and Value methods used to iterate over a set.Interface.
 type Iterable interface {
-	// Next prepares the next element for reading with the Value method. It returns true on success, or false if there
-	// are no elements left, after which the Value method would always return the zero value.
+	// Next prepares the next item for reading with the Value method. It returns true on success, or false if there
+	// are no items left, after which the Value method would always return the zero value.
 	//
 	// Every call to Value, even the first one, must be preceded by a call to Next.
 	Next() bool
 
-	// Value reads and returns the element prepared by the Next method.
+	// Value reads and returns the item prepared by the Next method.
 	Value() int
 }
 
-// AreEqual checks whether the two sets have the same elements.
+// AreEqual checks whether the two sets have the same items.
 func AreEqual(set1, set2 Interface) bool {
 	if set1.Size() != set2.Size() {
 		return false
@@ -107,12 +107,12 @@ func AreDisjoint(set1, set2 Interface) bool {
 	return disjoint
 }
 
-// MergeInto adds all the elements of the second set to the first.
+// MergeInto adds all the items of the second set to the first.
 func MergeInto(mainSet, otherSet Interface) {
 	mainSet.Add(otherSet.Values()...)
 }
 
-// RetainOnly removes all the elements from the first set that are not in the second.
+// RetainOnly removes all the items from the first set that are not in the second.
 func RetainOnly(mainSet, otherSet Interface) {
 	mainSet.Each(func(item int) bool {
 		if !otherSet.Contains(item) {
@@ -123,7 +123,7 @@ func RetainOnly(mainSet, otherSet Interface) {
 	})
 }
 
-// SeparateFrom removes all the elements from the first set that are also in the second.
+// SeparateFrom removes all the items from the first set that are also in the second.
 func SeparateFrom(mainSet, otherSet Interface) {
 	mainSet.Remove(otherSet.Values()...)
 }
