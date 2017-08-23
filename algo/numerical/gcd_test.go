@@ -17,7 +17,7 @@ func TestGCD(t *testing.T) {
 	for _, c := range cases {
 		gcd := numerical.GCD(c[0], c[1])
 		if gcd != c[2] {
-			t.Errorf("GCD: expected GCD to be %d, got %d", c[2], gcd)
+			t.Errorf("GCD %d, %d: expected GCD to be %d, got %d", c[0], c[1], c[2], gcd)
 		}
 	}
 }

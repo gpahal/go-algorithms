@@ -17,7 +17,7 @@ func TestLCM(t *testing.T) {
 	for _, c := range cases {
 		lcm := numerical.LCM(c[0], c[1])
 		if lcm != c[2] {
-			t.Errorf("LCM: expected LCM to be %d, got %d", c[2], lcm)
+			t.Errorf("LCM %d, %d: expected LCM to be %d, got %d", c[0], c[1], c[2], lcm)
 		}
 	}
 }

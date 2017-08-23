@@ -19,7 +19,7 @@ func TestFibonacci(t *testing.T) {
 	for _, c := range cases {
 		value := numerical.Fibonacci(c[0])
 		if value != c[1] {
-			t.Errorf("Fibonacci: expected Fibonacci to be %d, got %d", c[1], value)
+			t.Errorf("Fibonacci %d: expected Fibonacci to be %d, got %d", c[0], c[1], value)
 		}
 	}
 }
