@@ -1,6 +1,6 @@
 package numerical
 
-// GCD return the gcd of a and b.
+// GCD return the greatest common divisor of a and b.
 func GCD(a, b int) int {
 	if a < 0 {
 		a *= -1

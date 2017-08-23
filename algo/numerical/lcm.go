@@ -1,6 +1,6 @@
 package numerical
 
-// LCM return the lcm of a and b.
+// LCM return the least common multiple of a and b.
 func LCM(a, b int) int {
 	if a < 0 {
 		a *= -1
