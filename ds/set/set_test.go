@@ -21,44 +21,44 @@ outer:
 	return true
 }
 
-func TestInterface(t *testing.T) {
-	newSet := set.NewHashSet()
-	if newSet.Size() != 0 {
-		t.Errorf("Size: expected Size to be 0, got %d", newSet.Size())
+func testInterfaceHelper(newFn func(...int) set.Interface, t *testing.T) {
+	s := newFn()
+	if s.Size() != 0 {
+		t.Errorf("Size: expected Size to be 0, got %d", s.Size())
 	}
-	if !newSet.Empty() {
+	if !s.Empty() {
 		t.Error("Empty: expected Empty to be true, got false")
 	}
 
-	newSet.Add(5, 7, 9)
-	newSet.Add(11, 5, -4)
-	if newSet.Size() != 5 {
-		t.Errorf("Add 5, 7, 9, 11, -4: expected Size to be 5, got %d", newSet.Size())
+	s.Add(5, 7, 9)
+	s.Add(11, 5, -4)
+	if s.Size() != 5 {
+		t.Errorf("Add 5, 7, 9, 11, -4: expected Size to be 5, got %d", s.Size())
 	}
 
-	newSet.Delete(5, 7, 13)
-	if newSet.Size() != 3 {
-		t.Errorf("Delete 5, 7, 13: expected Size to be 3, got %d", newSet.Size())
+	s.Delete(5, 7, 13)
+	if s.Size() != 3 {
+		t.Errorf("Delete 5, 7, 13: expected Size to be 3, got %d", s.Size())
 	}
 
-	if !newSet.Contains(-4, 9) {
-		t.Errorf("Contains -4, 9: expected Contains to be true, got false %v", newSet.Values())
+	if !s.Contains(-4, 9) {
+		t.Errorf("Contains -4, 9: expected Contains to be true, got false %v", s.Values())
 	}
 
-	if newSet.Contains(-4, 5) {
+	if s.Contains(-4, 5) {
 		t.Error("Contains -4, 5: expected Contains to be false, got true")
 	}
 
-	tmpSet := newSet.Copy()
-	if !set.AreEqual(newSet, tmpSet) {
+	tmpSet := s.Copy()
+	if !set.AreEqual(s, tmpSet) {
 		t.Error("Copy: expected AreEqual to be true, got false")
 	}
 	tmpSet.Clear()
-	if set.AreEqual(newSet, tmpSet) {
+	if set.AreEqual(s, tmpSet) {
 		t.Error("Clear Copy: expected AreEqual to be false, got true")
 	}
 
-	tmpArr := newSet.Values()
+	tmpArr := s.Values()
 	if len(tmpArr) != 3 {
 		t.Errorf("Values 9, 11, -4: expected list's length to be 3, got %d", len(tmpArr))
 	}
@@ -67,8 +67,8 @@ func TestInterface(t *testing.T) {
 	}
 
 	tmpArr = make([]int, 0)
-	newSet.Each(func(item int) bool {
-		if !newSet.Contains(item) {
+	s.Each(func(item int) bool {
+		if !s.Contains(item) {
 			t.Errorf("Each 9, 11, -4 (Contains %d): expected Contains to be true, got false", item)
 			return true
 		}
@@ -84,10 +84,10 @@ func TestInterface(t *testing.T) {
 	}
 
 	tmpArr = make([]int, 0)
-	iterable := newSet.Iterator()
+	iterable := s.Iterator()
 	for iterable.Next() {
 		item := iterable.Value()
-		if !newSet.Contains(item) {
+		if !s.Contains(item) {
 			t.Errorf("Each 9, 11, -4 (Contains %d): expected Contains to be true, got false", item)
 			break
 		}
@@ -101,11 +101,11 @@ func TestInterface(t *testing.T) {
 		t.Errorf("Each 9, 11, -4: expected iterations to contain [9 11 -4], got %v", tmpArr)
 	}
 
-	newSet.Clear()
-	if newSet.Size() != 0 {
-		t.Errorf("Clear: expected Size to be 0, got %d", newSet.Size())
+	s.Clear()
+	if s.Size() != 0 {
+		t.Errorf("Clear: expected Size to be 0, got %d", s.Size())
 	}
-	if !newSet.Empty() {
+	if !s.Empty() {
 		t.Error("Clear: expected Empty to be true, got false")
 	}
 }

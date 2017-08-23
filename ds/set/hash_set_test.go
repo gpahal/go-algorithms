@@ -14,4 +14,6 @@ func TestNewHashSet(t *testing.T) {
 	if !newSet.Contains(4, 5, 6) {
 		t.Error("NewHashSet: expected Contains to be true, got false")
 	}
+
+	testInterfaceHelper(set.NewHashSet, t)
 }
