@@ -261,14 +261,14 @@ func testInterfaceHelper(newFn func(...int) list.Interface, t *testing.T) {
 	for iterable.Next() {
 		item := iterable.Value()
 		if !newList.Contains(item) {
-			t.Errorf("Each 9, 11, -4 (Contains %d): expected Contains to be true, got false", item)
+			t.Errorf("Iterator 9, 11, -4 (Contains %d): expected Contains to be true, got false", item)
 			break
 		}
 
 		tmpArr = append(tmpArr, item)
 	}
 	if !slicesEqual(tmpArr, []int{9, 11, -4}) {
-		t.Errorf("Each 9, 11, -4: expected iterations to be [9 11 -4], got %v", tmpArr)
+		t.Errorf("Iterator 9, 11, -4: expected iterations to be [9 11 -4], got %v", tmpArr)
 	}
 
 	l.Clear()

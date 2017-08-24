@@ -88,17 +88,17 @@ func testInterfaceHelper(newFn func(...int) set.Interface, t *testing.T) {
 	for iterable.Next() {
 		item := iterable.Value()
 		if !s.Contains(item) {
-			t.Errorf("Each 9, 11, -4 (Contains %d): expected Contains to be true, got false", item)
+			t.Errorf("Iterator 9, 11, -4 (Contains %d): expected Contains to be true, got false", item)
 			break
 		}
 
 		tmpArr = append(tmpArr, item)
 	}
 	if len(tmpArr) != 3 {
-		t.Errorf("Each 9, 11, -4: expected total iterations to be 3, got %d", len(tmpArr))
+		t.Errorf("Iterator 9, 11, -4: expected total iterations to be 3, got %d", len(tmpArr))
 	}
 	if !sliceContains(tmpArr, 9, 11, -4) {
-		t.Errorf("Each 9, 11, -4: expected iterations to contain [9 11 -4], got %v", tmpArr)
+		t.Errorf("Iterator 9, 11, -4: expected iterations to contain [9 11 -4], got %v", tmpArr)
 	}
 
 	s.Clear()
