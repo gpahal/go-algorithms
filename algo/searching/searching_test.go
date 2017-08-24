@@ -13,37 +13,6 @@ func init() {
 	rand.Seed(time.Now().UnixNano())
 }
 
-func generateRandSlice(length int, biggerInts bool) []int {
-	if length <= 0 {
-		return []int{}
-	}
-	maxNum := 50
-	if biggerInts {
-		maxNum = 500000
-	}
-
-	arr := make([]int, length)
-	for i := 0; i < length; i += 1 {
-		arr[i] = (rand.Int() % maxNum) + 1 // random number in the range 1..50
-	}
-
-	return arr
-}
-
-func checkSearchResult(arr []int, key, idx int) (bool, int) {
-	if idx < 0 || len(arr) <= idx || arr[idx] != key {
-		for i, el := range arr {
-			if el == key {
-				return false, i
-			}
-		}
-
-		return idx < 0, -1
-	}
-
-	return true, idx
-}
-
 func assertSearchFn(t *testing.T, name string, fn func([]int, int) int, sort bool) bool {
 	for i := 0; i < 10; i += 1 {
 		length := (rand.Int() % 20) + 1
@@ -72,6 +41,20 @@ func assertSearchFn(t *testing.T, name string, fn func([]int, int) int, sort boo
 	return true
 }
 
+func checkSearchResult(arr []int, key, idx int) (bool, int) {
+	if idx < 0 || len(arr) <= idx || arr[idx] != key {
+		for i, el := range arr {
+			if el == key {
+				return false, i
+			}
+		}
+
+		return idx < 0, -1
+	}
+
+	return true, idx
+}
+
 func TestLinearSearch(t *testing.T) {
 	assertSearchFn(t, "LinearSearch", searching.LinearSearch, false)
 }
@@ -98,4 +81,21 @@ func BenchmarkLinearSearch_10000(b *testing.B) {
 
 func BenchmarkBinarySearch_10000(b *testing.B) {
 	benchmarkSearchFn(b, searching.BinarySearch, true, 10000)
+}
+
+func generateRandSlice(length int, biggerInts bool) []int {
+	if length <= 0 {
+		return []int{}
+	}
+	maxNum := 50
+	if biggerInts {
+		maxNum = 500000
+	}
+
+	arr := make([]int, length)
+	for i := 0; i < length; i += 1 {
+		arr[i] = (rand.Int() % maxNum) + 1 // random number in the range 1..50
+	}
+
+	return arr
 }

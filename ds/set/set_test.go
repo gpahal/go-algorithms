@@ -6,21 +6,6 @@ import (
 	"github.com/gpahal/go-algorithms/ds/set"
 )
 
-func sliceContains(arr []int, items ...int) bool {
-outer:
-	for _, item := range items {
-		for _, el := range arr {
-			if el == item {
-				continue outer
-			}
-		}
-
-		return false
-	}
-
-	return true
-}
-
 func testInterfaceHelper(newFn func(...int) set.Interface, t *testing.T) {
 	s := newFn()
 	if s.Size() != 0 {
@@ -251,4 +236,19 @@ func TestSymmetricDifference(t *testing.T) {
 	if !set.AreEqual(expectedSymmetricDifferenceSet, gotDifferenceSet) {
 		t.Errorf("Symmetric Difference: expected %v, got %v", expectedSymmetricDifferenceSet.Values(), gotDifferenceSet.Values())
 	}
+}
+
+func sliceContains(arr []int, items ...int) bool {
+outer:
+	for _, item := range items {
+		for _, el := range arr {
+			if el == item {
+				continue outer
+			}
+		}
+
+		return false
+	}
+
+	return true
 }

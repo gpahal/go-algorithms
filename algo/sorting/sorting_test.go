@@ -12,19 +12,6 @@ func init() {
 	rand.Seed(time.Now().UnixNano())
 }
 
-func generateRandSlice(length int) []int {
-	if length <= 0 {
-		return []int{}
-	}
-
-	arr := make([]int, length)
-	for i := 0; i < length; i += 1 {
-		arr[i] = (rand.Int() % 50) + 1 // random number in the range 1..50
-	}
-
-	return arr
-}
-
 func assertSortFn(t *testing.T, name string, fn func([]int)) bool {
 	for i := 0; i < 10; i += 1 {
 		length := (rand.Int() % 20) + 1
@@ -119,4 +106,17 @@ func BenchmarkMergeSortIterative_10000(b *testing.B) {
 
 func BenchmarkHeapSort_10000(b *testing.B) {
 	benchmarkSortFn(b, sorting.HeapSort, 10000)
+}
+
+func generateRandSlice(length int) []int {
+	if length <= 0 {
+		return []int{}
+	}
+
+	arr := make([]int, length)
+	for i := 0; i < length; i += 1 {
+		arr[i] = (rand.Int() % 50) + 1 // random number in the range 1..50
+	}
+
+	return arr
 }

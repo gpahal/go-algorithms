@@ -7,19 +7,28 @@ import (
 	"github.com/gpahal/go-algorithms/algo/greedy"
 )
 
-func sliceContains(arr [][2]int, items ...[2]int) bool {
-outer:
-	for _, item := range items {
-		for _, el := range arr {
-			if el[0] == item[0] && el[1] == item[1] {
-				continue outer
-			}
-		}
-
-		return false
+func TestActivitySelection(t *testing.T) {
+	cases := []struct {
+		activities [][2]int
+		resCount   int
+	}{
+		{[][2]int{}, 0},
+		{[][2]int{{7, 8}}, 1},
+		{[][2]int{{7, 12}, {8, 14}, {9, 15}}, 1},
+		{[][2]int{{10, 20}, {12, 25}, {20, 30}}, 2},
+		{[][2]int{{1, 2}, {3, 4}, {0, 6}, {5, 7}, {8, 9}, {5, 9}}, 4},
+		{[][2]int{{1, 2}, {3, 4}, {-1, 6}}, 0},
 	}
 
-	return true
+	for _, c := range cases {
+		selection := greedy.ActivitySelection(c.activities, true)
+		if !validActivitySelection(c.activities, selection) {
+			t.Errorf("ActivitySelection %v: expected selection to be valid, got %v", c.activities, selection)
+		}
+		if len(selection) != c.resCount {
+			t.Errorf("ActivitySelection %v: expected selection count to be %d, got %d", c.activities, c.resCount, len(selection))
+		}
+	}
 }
 
 func validActivitySelection(activities, selection [][2]int) bool {
@@ -48,26 +57,17 @@ func validActivitySelection(activities, selection [][2]int) bool {
 	return true
 }
 
-func TestActivitySelection(t *testing.T) {
-	cases := []struct {
-		activities [][2]int
-		resCount   int
-	}{
-		{[][2]int{}, 0},
-		{[][2]int{{7, 8}}, 1},
-		{[][2]int{{7, 12}, {8, 14}, {9, 15}}, 1},
-		{[][2]int{{10, 20}, {12, 25}, {20, 30}}, 2},
-		{[][2]int{{1, 2}, {3, 4}, {0, 6}, {5, 7}, {8, 9}, {5, 9}}, 4},
-		{[][2]int{{1, 2}, {3, 4}, {-1, 6}}, 0},
+func sliceContains(arr [][2]int, items ...[2]int) bool {
+outer:
+	for _, item := range items {
+		for _, el := range arr {
+			if el[0] == item[0] && el[1] == item[1] {
+				continue outer
+			}
+		}
+
+		return false
 	}
 
-	for _, c := range cases {
-		selection := greedy.ActivitySelection(c.activities, true)
-		if !validActivitySelection(c.activities, selection) {
-			t.Errorf("ActivitySelection %v: expected selection to be valid, got %v", c.activities, selection)
-		}
-		if len(selection) != c.resCount {
-			t.Errorf("ActivitySelection %v: expected selection count to be %d, got %d", c.activities, c.resCount, len(selection))
-		}
-	}
+	return true
 }

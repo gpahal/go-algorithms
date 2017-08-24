@@ -6,23 +6,6 @@ import (
 	"github.com/gpahal/go-algorithms/algo/numerical"
 )
 
-func mapsEqual(a, b map[int]int) bool {
-	if len(a) != len(b) {
-		return false
-	}
-	if a == nil || b == nil {
-		return a == nil && b == nil
-	}
-
-	for k, v := range a {
-		if otherValue, ok := b[k]; !ok || otherValue != v {
-			return false
-		}
-	}
-
-	return true
-}
-
 func TestPrimeFactors(t *testing.T) {
 	cases := []struct {
 		value        int
@@ -41,4 +24,21 @@ func TestPrimeFactors(t *testing.T) {
 			t.Errorf("PrimeFactors %d: expected PrimeFactors to be %v, got %v", c.value, c.primeFactors, primeFactors)
 		}
 	}
+}
+
+func mapsEqual(a, b map[int]int) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	if a == nil || b == nil {
+		return a == nil && b == nil
+	}
+
+	for k, v := range a {
+		if otherValue, ok := b[k]; !ok || otherValue != v {
+			return false
+		}
+	}
+
+	return true
 }

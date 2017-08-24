@@ -6,20 +6,6 @@ import (
 	"github.com/gpahal/go-algorithms/ds/list"
 )
 
-func slicesEqual(arr1 []int, arr2 []int) bool {
-	if len(arr1) != len(arr2) {
-		return false
-	}
-
-	for i, el := range arr1 {
-		if el != arr2[i] {
-			return false
-		}
-	}
-
-	return true
-}
-
 func testInterfaceHelper(newFn func(...int) list.Interface, t *testing.T) {
 	l := newFn()
 	if l.Len() != 0 {
@@ -278,4 +264,18 @@ func testInterfaceHelper(newFn func(...int) list.Interface, t *testing.T) {
 	if !l.Empty() {
 		t.Error("Clear: expected Empty to be true, got false")
 	}
+}
+
+func slicesEqual(arr1 []int, arr2 []int) bool {
+	if len(arr1) != len(arr2) {
+		return false
+	}
+
+	for i, el := range arr1 {
+		if el != arr2[i] {
+			return false
+		}
+	}
+
+	return true
 }
