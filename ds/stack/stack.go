@@ -34,7 +34,7 @@ func (i *Instance) Values() []int {
 	return i.l.Values()
 }
 
-// Top returns the top/last pushed element of the stack.
+// Top returns the top/last pushed element of the stack. If the stack is empty, second return value is false.
 func (i *Instance) Top() (int, bool) {
 	el := i.l.First()
 	if el == nil {
@@ -49,7 +49,8 @@ func (i *Instance) Push(items ...int) {
 	i.l.PushFront(items...)
 }
 
-// Pop pops out an item from the stack in LIFO (Last In First Out) order.
+// Pop pops out an item from the stack in LIFO (Last In First Out) order. If the stack is empty, second return value is
+// false.
 func (i *Instance) Pop() (int, bool) {
 	el := i.l.PopFront()
 	if el == nil {

@@ -34,7 +34,7 @@ func (i *Instance) Values() []int {
 	return i.l.Values()
 }
 
-// Front returns the front/oldest enqueued element of the stack.
+// Front returns the front/oldest enqueued element of the stack. If the queue is empty, second return value is false.
 func (i *Instance) Front() (int, bool) {
 	el := i.l.First()
 	if el == nil {
@@ -49,7 +49,8 @@ func (i *Instance) Enqueue(items ...int) {
 	i.l.PushBack(items...)
 }
 
-// Dequeue removes the item from the front of the queue and returns it.
+// Dequeue removes the item from the front of the queue and returns it. If the queue is empty, second return value is
+// false.
 func (i *Instance) Dequeue() (int, bool) {
 	el := i.l.PopFront()
 	if el == nil {
