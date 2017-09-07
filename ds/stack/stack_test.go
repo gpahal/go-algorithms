@@ -85,9 +85,15 @@ func TestInstance_Top(t *testing.T) {
 }
 
 func TestInstance_Push(t *testing.T) {
-	newStack := stack.New(4, 5, 6)
-	newStack.Push(7)
+	newStack := stack.New()
+	newStack.Push(4, 5, 6)
 	tmpArr := newStack.Values()
+	if !slicesEqual(tmpArr, []int{6, 5, 4}) {
+		t.Errorf("Push 4, 5, 6: expected Values to be [6 5 4], got %v", tmpArr)
+	}
+
+	newStack.Push(7)
+	tmpArr = newStack.Values()
 	if !slicesEqual(tmpArr, []int{7, 6, 5, 4}) {
 		t.Errorf("Push 7: expected Values to be [7 6 5 4], got %v", tmpArr)
 	}
