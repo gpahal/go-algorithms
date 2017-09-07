@@ -34,6 +34,16 @@ func (i *Instance) Values() []int {
 	return i.l.Values()
 }
 
+// Top returns the top/last pushed element of the stack.
+func (i *Instance) Top() (int, bool) {
+	el := i.l.First()
+	if el == nil {
+		return 0, false
+	}
+
+	return el.Value, true
+}
+
 // Push pushes the given items to the stack.
 func (i *Instance) Push(items ...int) {
 	i.l.PushFront(items...)

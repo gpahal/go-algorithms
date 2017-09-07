@@ -64,6 +64,26 @@ func TestInstance_Values(t *testing.T) {
 	}
 }
 
+func TestInstance_Top(t *testing.T) {
+	newStack := stack.New(4, 5, 6)
+	newStack.Push(7)
+	val, ok := newStack.Top()
+	if !ok || val != 7 {
+		t.Errorf("Top: expected Top to return (7, true), got (%d, %t)", val, ok)
+	}
+
+	tmpArr := newStack.Values()
+	if !slicesEqual(tmpArr, []int{7, 6, 5, 4}) {
+		t.Errorf("Top: expected Values to be [7 6 5 4], got %v", tmpArr)
+	}
+
+	newStack.Clear()
+	val, ok = newStack.Top()
+	if ok || val != 0 {
+		t.Errorf("Top: expected Top to return (0, false), got (%d, %t)", val, ok)
+	}
+}
+
 func TestInstance_Push(t *testing.T) {
 	newStack := stack.New(4, 5, 6)
 	newStack.Push(7)
