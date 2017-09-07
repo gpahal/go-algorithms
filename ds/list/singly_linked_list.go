@@ -329,9 +329,9 @@ func (sll *SinglyLinkedList) DeleteFirst(items ...int) {
 	}
 
 	var prev *Element
-	curr := sll.head
-	for curr != nil {
-		next := curr.Next
+	var next *Element
+	for curr := sll.head; curr != nil; curr = next {
+		next = curr.Next
 		if _, ok := itemsMap[curr.Value]; ok {
 			delete(itemsMap, curr.Value)
 			if prev == nil {
@@ -346,8 +346,6 @@ func (sll *SinglyLinkedList) DeleteFirst(items ...int) {
 		} else {
 			prev = curr
 		}
-
-		curr = next
 	}
 }
 
@@ -362,9 +360,9 @@ func (sll *SinglyLinkedList) Delete(items ...int) {
 	}
 
 	var prev *Element
-	curr := sll.head
-	for curr != nil {
-		next := curr.Next
+	var next *Element
+	for curr := sll.head; curr != nil; curr = next {
+		next = curr.Next
 		if _, ok := itemsMap[curr.Value]; ok {
 			if prev == nil {
 				sll.Remove(sll.head)
@@ -374,8 +372,6 @@ func (sll *SinglyLinkedList) Delete(items ...int) {
 		} else {
 			prev = curr
 		}
-
-		curr = next
 	}
 }
 
