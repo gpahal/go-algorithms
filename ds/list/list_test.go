@@ -209,7 +209,7 @@ func testInterfaceHelper(newFn func(...int) list.Interface, t *testing.T) {
 	newList.DeleteFirst(7, 5)
 	tmpArr = newList.Values()
 	if !slicesEqual(tmpArr, []int{9, 11, 5, -4}) {
-		t.Errorf("DeleteFirst: expected Values to be [9 11 5 -4], got %v", tmpArr)
+		t.Errorf("DeleteFirst 7, 5: expected Values to be [9 11 5 -4], got %v", tmpArr)
 	}
 
 	newList.PushFront(7, 5)
@@ -217,7 +217,7 @@ func testInterfaceHelper(newFn func(...int) list.Interface, t *testing.T) {
 	newList.Delete(7, 5)
 	tmpArr = newList.Values()
 	if !slicesEqual(tmpArr, []int{9, 11, -4}) {
-		t.Errorf("Delete: expected Values to be [9 11 -4], got %v", tmpArr)
+		t.Errorf("Delete 7, 5: expected Values to be [9 11 -4], got %v", tmpArr)
 	}
 
 	if !newList.Contains(-4, 9) {
