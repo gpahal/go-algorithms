@@ -34,6 +34,16 @@ func (i *Instance) Values() []int {
 	return i.l.Values()
 }
 
+// Front returns the front/oldest enqueued element of the stack.
+func (i *Instance) Front() (int, bool) {
+	el := i.l.First()
+	if el == nil {
+		return 0, false
+	}
+
+	return el.Value, true
+}
+
 // Enqueue adds the items at the end of the queue.
 func (i *Instance) Enqueue(items ...int) {
 	i.l.PushBack(items...)

@@ -64,6 +64,26 @@ func TestInstance_Values(t *testing.T) {
 	}
 }
 
+func TestInstance_Front(t *testing.T) {
+	newQueue := queue.New(4, 5, 6)
+	newQueue.Enqueue(7)
+	val, ok := newQueue.Front()
+	if !ok || val != 4 {
+		t.Errorf("Front: expected Front to return (4, true), got (%d, %t)", val, ok)
+	}
+
+	tmpArr := newQueue.Values()
+	if !slicesEqual(tmpArr, []int{4, 5, 6, 7}) {
+		t.Errorf("Front: expected Values to be [4 5 6 7], got %v", tmpArr)
+	}
+
+	newQueue.Clear()
+	val, ok = newQueue.Front()
+	if ok || val != 0 {
+		t.Errorf("Front: expected Front to return (0, false), got (%d, %t)", val, ok)
+	}
+}
+
 func TestInstance_Enqueue(t *testing.T) {
 	newQueue := queue.New(4, 5, 6)
 	newQueue.Enqueue(7)
