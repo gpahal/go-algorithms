@@ -85,9 +85,15 @@ func TestInstance_Front(t *testing.T) {
 }
 
 func TestInstance_Enqueue(t *testing.T) {
-	newQueue := queue.New(4, 5, 6)
-	newQueue.Enqueue(7)
+	newQueue := queue.New()
+	newQueue.Enqueue(4, 5, 6)
 	tmpArr := newQueue.Values()
+	if !slicesEqual(tmpArr, []int{4, 5, 6}) {
+		t.Errorf("Enqueue 4, 5, 6: expected Values to be [4 5 6], got %v", tmpArr)
+	}
+
+	newQueue.Enqueue(7)
+	tmpArr = newQueue.Values()
 	if !slicesEqual(tmpArr, []int{4, 5, 6, 7}) {
 		t.Errorf("Enqueue 7: expected Values to be [4 5 6 7], got %v", tmpArr)
 	}
