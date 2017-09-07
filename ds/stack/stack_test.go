@@ -9,12 +9,12 @@ import (
 func TestNew(t *testing.T) {
 	newStack := stack.New(4, 5, 6)
 	if newStack.Len() != 3 {
-		t.Errorf("New: expected Len to be 3, got %d", newStack.Len())
+		t.Errorf("New 4, 5, 6: expected Len to be 3, got %d", newStack.Len())
 	}
 
 	tmpArr := newStack.Values()
 	if !slicesEqual(tmpArr, []int{6, 5, 4}) {
-		t.Errorf("New: expected Values to be [6 5 4], got %v", tmpArr)
+		t.Errorf("New 4, 5, 6: expected Values to be [6 5 4], got %v", tmpArr)
 	}
 }
 
