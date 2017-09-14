@@ -2,7 +2,7 @@ package greedy
 
 import "sort"
 
-// ActivitySelection problem takes a list of activities an 2-element array of start time and finish time selects the
+// ActivitySelection takes a list of activities an 2-element array of start time and finish time selects the
 // maximum number of activities that can be performed by a single person, assuming that a person can only work on a
 // single activity at a time. If activities are not in the correct format (0 <= start time < finish time), nil is
 // returned.
