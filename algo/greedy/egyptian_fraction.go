@@ -7,8 +7,8 @@ package greedy
 //
 // # Example
 //
-//     greedy.EgyptianFraction(2, 3)
-//     // Output: []int{2, 6} as 2/3 = 1/2 + 1/6
+//     ef := greedy.EgyptianFraction(2, 3)
+//     // ef = []int{2, 6} as 2/3 = 1/2 + 1/6
 //
 // If num < 0 or den <= 0 or num >= den, nil is returned.
 func EgyptianFraction(num, den int) []int {

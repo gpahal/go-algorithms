@@ -5,8 +5,8 @@ package dynamic
 //
 // # Example
 //
-//     dynamic.LongestCommonSubsequence([]int{1, 5, 8, 9, 3}, []int{5, 8, 4, 9, 2})
-//     // Output: []int{5, 8, 9}
+//     lcs := dynamic.LongestCommonSubsequence([]int{1, 5, 8, 9, 3}, []int{5, 8, 4, 9, 2})
+//     // lcs = []int{5, 8, 9}
 //
 // If arr1 or arr2 is nil, nil is returned.
 func LongestCommonSubsequence(arr1, arr2 []int) []int {
