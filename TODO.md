@@ -18,5 +18,6 @@
 ## Documentation
 - Use GoDoc comments for all structs, interfaces and functions
 - Provide examples in the comments
-- Comment the various steps used in an algorithm
+- Comment the various steps used in an algorithm, time complexity, space
+  complexity etc.
 - List all the data structures and algorithms in the README
