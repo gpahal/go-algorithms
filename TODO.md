@@ -14,3 +14,9 @@
 - Heap
 - Hash table (simple implementation - should use map instead of this
   while implementing other algorithms and data structures)
+
+## Documentation
+- Use GoDoc comments for all structs, interfaces and functions
+- Provide examples in the comments
+- Comment the various steps used in an algorithm
+- List all the data structures and algorithms in the README
