@@ -22,3 +22,25 @@ func TestLCM(t *testing.T) {
 		}
 	}
 }
+
+func TestLCMArray(t *testing.T) {
+	cases := []struct {
+		arr []int
+		lcm int
+	}{
+		{[]int{52, 78, 26}, 156},
+		{[]int{4, 12, 16, -4, 8, 10}, 240},
+		{[]int{1, 2, 3}, 6},
+		{[]int{40, 40, 40, 40}, 40},
+		{[]int{7}, 7},
+		{nil, 0},
+		{[]int{}, 0},
+	}
+
+	for _, c := range cases {
+		lcm := numerical.LCMArray(c.arr)
+		if lcm != c.lcm {
+			t.Errorf("LCMArray %#v: expected LCMArray to be %d, got %d", c.arr, c.lcm, lcm)
+		}
+	}
+}
