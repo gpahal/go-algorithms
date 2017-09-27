@@ -7,9 +7,10 @@ import (
 )
 
 func TestGCD(t *testing.T) {
-	cases := [][]int{
+	cases := [][3]int{
 		{52, 78, 26},
 		{8, -20, 4},
+		{1, 3, 1},
 		{40, 40, 40},
 		{0, 10, 10},
 	}

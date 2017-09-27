@@ -7,9 +7,10 @@ import (
 )
 
 func TestLCM(t *testing.T) {
-	cases := [][]int{
+	cases := [][3]int{
 		{52, 78, 156},
 		{8, -20, 40},
+		{1, 3, 3},
 		{40, 40, 40},
 		{0, 10, 0},
 	}
