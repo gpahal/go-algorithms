@@ -21,3 +21,25 @@ func TestGCD(t *testing.T) {
 		}
 	}
 }
+
+func TestGCDArray(t *testing.T) {
+	cases := []struct {
+		arr []int
+		gcd int
+	}{
+		{[]int{52, 78, 26}, 26},
+		{[]int{4, 12, 16, -4, 8, 10}, 2},
+		{[]int{1, 2, 3}, 1},
+		{[]int{40, 40, 40, 40}, 40},
+		{[]int{7}, 7},
+		{nil, 0},
+		{[]int{}, 0},
+	}
+
+	for _, c := range cases {
+		gcd := numerical.GCDArray(c.arr)
+		if gcd != c.gcd {
+			t.Errorf("GCDArray %#v: expected GCDArray to be %d, got %d", c.arr, c.gcd, gcd)
+		}
+	}
+}
