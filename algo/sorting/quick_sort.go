@@ -31,7 +31,7 @@ func QuickSortIterative(arr []int) {
 		return
 	}
 
-	// Create a stack od length (arrLength+1) / 2.
+	// Create a stack of length (arrLength+1)*2.
 	stack := make([][]int, 0, (arrLength+1)*2)
 	stack = append(stack, arr)
 
