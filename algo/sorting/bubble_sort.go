@@ -7,7 +7,9 @@ func BubbleSort(arr []int) {
 		return
 	}
 
+	// Loop until no swaps are done in an iteration.
 	for {
+		// Counter of the number of swaps done in the current iteration.
 		swaps := 0
 
 		// Loop arrLength-1 times over all pairs of consecutive elements and swap in not in the correct order.
