@@ -31,10 +31,11 @@ func QuickSortIterative(arr []int) {
 		return
 	}
 
+	// Create a stack od length (arrLength+1) / 2.
 	stack := make([][]int, 0, (arrLength+1)<<1)
 	stack = append(stack, arr)
 
-	// Iterate over each stack element.
+	// Iterate until the stack is empty.
 	for len(stack) > 0 {
 		topIdx := len(stack) - 1
 		currArr := stack[topIdx]
@@ -53,6 +54,7 @@ func QuickSortIterative(arr []int) {
 	}
 }
 
+// partition partitions arr using the middle element as the pivot.
 func partition(arr []int) int {
 	arrLength := len(arr)
 

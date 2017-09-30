@@ -16,6 +16,7 @@ func MergeSort(arr []int) {
 	MergeSort(arr[:mid])
 	MergeSort(arr[mid:])
 
+	// Merge the sorted halves.
 	merge(arr, mid)
 }
 
@@ -26,7 +27,7 @@ func MergeSortIterative(arr []int) {
 		return
 	}
 
-	// Merge sorted slices bottom up, starting from single element slices.
+	// Merge sorted slices bottom up, starting from single element slices and doubling the size in each iteration.
 	currSize := 1
 	for currSize < arrLength {
 		doubleCurrSize := currSize << 1
@@ -46,6 +47,7 @@ func MergeSortIterative(arr []int) {
 	}
 }
 
+// merge the sorted slices arr[:mid] and arr[mid:].
 func merge(arr []int, mid int) {
 	// Check if merge is required.
 	if len(arr) < 2 || arr[mid-1] <= arr[mid] {
@@ -58,7 +60,7 @@ func merge(arr []int, mid int) {
 	tmpArr := make([]int, mid)
 	copy(tmpArr, arr[:mid])
 
-	// Merge the two parts.
+	// Merge the two slices, incrementally taking the smallest element among the smallest of the two slices.
 	idx, left, right := 0, 0, mid
 	for {
 		if tmpArr[left] <= arr[right] {
