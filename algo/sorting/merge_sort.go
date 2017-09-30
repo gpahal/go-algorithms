@@ -12,7 +12,7 @@ func MergeSort(arr []int) {
 	}
 
 	// Recursively sort the two halves of the slice.
-	mid := arrLength >> 1
+	mid := arrLength / 2
 	MergeSort(arr[:mid])
 	MergeSort(arr[mid:])
 
@@ -30,7 +30,7 @@ func MergeSortIterative(arr []int) {
 	// Merge sorted slices bottom up, starting from single element slices and doubling the size in each iteration.
 	currSize := 1
 	for currSize < arrLength {
-		doubleCurrSize := currSize << 1
+		doubleCurrSize := currSize * 2
 
 		// Loop over the whole slice in steps of doubleCurrSize and merge the two consecutive sorted slices of size
 		// currSize.

@@ -13,7 +13,7 @@ func PrimeFactors(n int) map[int]int {
 
 	count := 0
 	for n%2 == 0 {
-		n >>= 1
+		n /= 2
 		count++
 	}
 	if count > 0 {

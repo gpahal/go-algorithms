@@ -12,7 +12,7 @@ func binarySearchHelper(arr []int, key int, idxToBeAdded int) int {
 		return -1
 	}
 
-	mid := arrLength >> 1
+	mid := arrLength / 2
 	midVal := arr[mid]
 	if midVal == key {
 		return mid + idxToBeAdded

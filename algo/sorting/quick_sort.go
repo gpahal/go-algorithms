@@ -15,7 +15,7 @@ func QuickSort(arr []int) {
 	partitionIdx := partition(arr)
 
 	// Recursively sort the two partitions.
-	if partitionIdx < arrLength>>1 {
+	if partitionIdx < arrLength/2 {
 		QuickSort(arr[:partitionIdx])
 		QuickSort(arr[partitionIdx+1:])
 	} else {
@@ -32,7 +32,7 @@ func QuickSortIterative(arr []int) {
 	}
 
 	// Create a stack od length (arrLength+1) / 2.
-	stack := make([][]int, 0, (arrLength+1)<<1)
+	stack := make([][]int, 0, (arrLength+1)*2)
 	stack = append(stack, arr)
 
 	// Iterate until the stack is empty.
@@ -60,7 +60,7 @@ func partition(arr []int) int {
 
 	// Choose the middle element as the pivot.
 	lastIdx := arrLength - 1
-	pivotIdx := arrLength >> 1
+	pivotIdx := arrLength / 2
 	pivotVal := arr[pivotIdx]
 
 	arr[lastIdx], arr[pivotIdx] = pivotVal, arr[lastIdx]

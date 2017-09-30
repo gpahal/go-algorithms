@@ -30,8 +30,8 @@ func HeapSort(arr []int) {
 // are already "heapified".
 func heapify(arr []int, size, idx int) {
 	largestIdx := idx
-	leftIdx := idx<<1 + 1
-	rightIdx := idx<<1 + 2
+	leftIdx := idx*2 + 1
+	rightIdx := idx*2 + 2
 
 	// Find largestIdx.
 
