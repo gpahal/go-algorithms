@@ -9,9 +9,9 @@ func Fibonacci(n int) int {
 		return 1
 	}
 
-	// Store the prev to prev value. Initially = Fibonacci(0).
+	// pprev stores the prev to prev fibonacci value. Initially pprev = Fibonacci(0).
 	pprev := 0
-	// Store the previous value. Initially = Fibonacci(1).
+	// prev stores the previous fibonacci value. Initially prev = Fibonacci(1).
 	prev := 1
 
 	// Apply the Fibonacci formula (ie. F(k-1), F(k) = F(k), F(k-1) + F(k)) n-1 times on pprev and prev to get
