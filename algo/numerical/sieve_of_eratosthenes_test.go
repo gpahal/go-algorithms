@@ -20,13 +20,13 @@ func TestSieveOfEratosthenes(t *testing.T) {
 
 	for _, c := range cases {
 		sieve := numerical.SieveOfEratosthenes(c.limit)
-		if !sliceEquals(sieve, c.sieve) {
+		if !slicesEqual(sieve, c.sieve) {
 			t.Errorf("SieveOfEratosthenes %d: expected sieve to be %v, got %v", c.limit, c.sieve, sieve)
 		}
 	}
 }
 
-func sliceEquals(arr1 []bool, arr2 []bool) bool {
+func slicesEqual(arr1 []bool, arr2 []bool) bool {
 	if arr1 == nil && arr2 == nil {
 		return true
 	}
