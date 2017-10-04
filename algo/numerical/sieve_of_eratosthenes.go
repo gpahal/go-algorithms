@@ -17,11 +17,18 @@ func SieveOfEratosthenes(limit int) []bool {
 	sieve[0] = true
 	sieve[1] = true
 
-	// Loop over all numbers starting from 2.
-	for p := 2; p <= limit; p++ {
+	// Mark multiples of 2 as composite or not prime.
+	for m := 4; m <= limit; m += 2 {
+		sieve[m] = true
+	}
+
+	// Loop over all odd numbers starting from 3. 2 is being treated as a special case as it is the only prime that is
+	// even. This allows us to skip all even numbers in the loop.
+	for p := 3; p <= limit; p += 2 {
 		if !sieve[p] {
-			// Mark numbers p(p), p(p+1), p(p+2), ... as composite or not prime.
-			for m := p * p; m <= limit; m += p {
+			// Mark numbers p(p), p(p+2), p(p+4), ... as composite or not prime. NOTE: p+1, p+3 are even and hence
+			// p(p+1), p(p+3), ... have already been marked as they are multiples of 2.
+			for m := p * p; m <= limit; m += 2 * p {
 				sieve[m] = true
 			}
 		}
