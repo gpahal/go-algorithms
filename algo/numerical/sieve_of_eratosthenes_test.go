@@ -13,7 +13,7 @@ func TestSieveOfEratosthenes(t *testing.T) {
 	}{
 		{1, []bool{true, true}},
 		{4, []bool{true, true, false, false, true}},
-		{15, []bool{true, true, false, false, true, false, true, false, true, true, true, false, true, false, true, true}},
+		{30, []bool{true, true, false, false, true, false, true, false, true, true, true, false, true, false, true, true, true, false, true, false, true, true, true, false, true, true, true, true, true, false, true}},
 		{0, nil},
 		{1 << 28, nil},
 	}
