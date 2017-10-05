@@ -36,3 +36,69 @@ func SieveOfEratosthenes(limit int) []bool {
 
 	return sieve
 }
+
+// SieveOfEratosthenesDynamic returns a generator function which when called the nth time returns the nth prime number.
+// Unlike the normal SieveOfEratosthenes function, this function does not allocate a huge slice at initialization.
+// That is why it is has the word dynamic in its name.
+func SieveOfEratosthenesDynamic() func() int {
+	// composites is a temporary map of composites (only odd numbers) to their factors.
+	composites := make(map[int][]int)
+
+	// Start with the number 2.
+	p := 2
+
+	return func() int {
+		// 2 is being treated as a special case. Simply, set p to 3 and return 2.
+		if p == 2 {
+			p = 3
+			return 2
+		}
+
+		// returnVal stores the current value of p as it needs to be returned at the end.
+		returnVal := p
+
+		// Append p to composites[p*p] as p is a factor of p*p.
+		pSquared := p * p
+		factors, ok := composites[pSquared]
+		if ok {
+			composites[pSquared] = append(factors, p)
+		} else {
+			composites[pSquared] = []int{p}
+		}
+
+		var factorMultiple int
+		var tmpFactors []int
+
+		// Increment by 2 to analyze the next potential prime number. As p >= 3 here, even numbers cannot be prime,
+		// thus, we are incrementing by 2.
+		p += 2
+		for {
+			// If current p is not composite => p is prime. This will be returned in the next invocation of the
+			// generator function.
+			factors, ok = composites[p]
+			if !ok {
+				break
+			}
+
+			// Loop over all the factors of composite p.
+			for _, factor := range factors {
+				// Append factor as a factor of p + 2*factor. NOTE: p + factor, p + 3*factor, ... are even and are not
+				// analyzed at all. NOTE: When we analyze p + 2*factor, we will ultimately also analyze p + 4*factor
+				// and hence only one number ie. p + 2*factor is added as a composite in this step.
+				factorMultiple = p + 2*factor
+				tmpFactors, ok = composites[factorMultiple]
+				if ok {
+					composites[factorMultiple] = append(tmpFactors, factor)
+				} else {
+					composites[factorMultiple] = []int{factor}
+				}
+			}
+
+			// Delete p from composites as it is no longer useful and deletion will save space.
+			delete(composites, p)
+			p += 2
+		}
+
+		return returnVal
+	}
+}
