@@ -26,6 +26,31 @@ func TestSieveOfEratosthenes(t *testing.T) {
 	}
 }
 
+func TestSieveOfEratosthenesDynamic(t *testing.T) {
+	cases := []struct {
+		n     int
+		prime int
+	}{
+		{1, 2},
+		{2, 3},
+		{3, 5},
+		{4, 7},
+		{25, 97},
+	}
+
+	for _, c := range cases {
+		f := numerical.SieveOfEratosthenesDynamic()
+		var prime int
+		for i := 0; i < c.n; i++ {
+			prime = f()
+		}
+
+		if prime != c.prime {
+			t.Errorf("SieveOfEratosthenesDynamic (n = %d): expected nth prime to be %d, got %d", c.n, c.prime, prime)
+		}
+	}
+}
+
 func slicesEqual(arr1 []bool, arr2 []bool) bool {
 	if arr1 == nil && arr2 == nil {
 		return true

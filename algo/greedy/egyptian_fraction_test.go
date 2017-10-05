@@ -23,13 +23,13 @@ func TestEgyptianFraction(t *testing.T) {
 
 	for _, c := range cases {
 		res := greedy.EgyptianFraction(c.num, c.den)
-		if !slicesEqual(res, c.res) {
+		if !slicesEquals(res, c.res) {
 			t.Errorf("EgyptianFraction %d %d: expected result to be %#v, got %#v", c.num, c.den, c.res, res)
 		}
 	}
 }
 
-func slicesEqual(arr1 []int, arr2 []int) bool {
+func slicesEquals(arr1 []int, arr2 []int) bool {
 	if arr1 == nil && arr2 == nil {
 		return true
 	}
