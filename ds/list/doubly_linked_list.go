@@ -291,9 +291,9 @@ func (dll *DoublyLinkedList) Remove(e *Element) *Element {
 	if e.Next != nil {
 		e.Next.Prev = e.Prev
 	}
+
 	e.Prev = nil
 	e.Next = nil
-
 	return e
 }
 

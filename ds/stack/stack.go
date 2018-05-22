@@ -1,42 +1,44 @@
 package stack
 
-import "github.com/gpahal/go-algorithms/ds/list"
+import (
+	"github.com/gpahal/go-algorithms/ds/list"
+)
 
-// Instance represents a stack instance implemented as a singly linked list.
-type Instance struct {
+// Stack represents a stack instance implemented as a singly linked list.
+type Stack struct {
 	l *list.SinglyLinkedList
 }
 
 // New returns a new stack instance with the given items pushed into it.
-func New(items ...int) *Instance {
-	i := &Instance{l: &list.SinglyLinkedList{}}
-	i.Push(items...)
-	return i
+func New(items ...int) *Stack {
+	s := &Stack{l: &list.SinglyLinkedList{}}
+	s.Push(items...)
+	return s
 }
 
-// Length returns the number of items in the stack.
-func (i *Instance) Len() int {
-	return i.l.Len()
+// Len returns the number of items in the stack.
+func (s *Stack) Len() int {
+	return s.l.Len()
 }
 
 // Empty checks whether the stack is empty.
-func (i *Instance) Empty() bool {
-	return i.l.Empty()
+func (s *Stack) Empty() bool {
+	return s.l.Empty()
 }
 
 // Clear deletes all the items from the stack.
-func (i *Instance) Clear() {
-	i.l.Clear()
+func (s *Stack) Clear() {
+	s.l.Clear()
 }
 
 // Values returns a slice of the items of the stack.
-func (i *Instance) Values() []int {
-	return i.l.Values()
+func (s *Stack) Values() []int {
+	return s.l.Values()
 }
 
 // Top returns the top/last pushed element of the stack. If the stack is empty, second return value is false.
-func (i *Instance) Top() (int, bool) {
-	el := i.l.First()
+func (s *Stack) Top() (int, bool) {
+	el := s.l.First()
 	if el == nil {
 		return 0, false
 	}
@@ -45,14 +47,14 @@ func (i *Instance) Top() (int, bool) {
 }
 
 // Push pushes the given items to the stack.
-func (i *Instance) Push(items ...int) {
-	i.l.PushFront(items...)
+func (s *Stack) Push(items ...int) {
+	s.l.PushFront(items...)
 }
 
 // Pop pops out an item from the stack in LIFO (Last In First Out) order. If the stack is empty, second return value is
 // false.
-func (i *Instance) Pop() (int, bool) {
-	el := i.l.PopFront()
+func (s *Stack) Pop() (int, bool) {
+	el := s.l.PopFront()
 	if el == nil {
 		return 0, false
 	}
@@ -61,8 +63,8 @@ func (i *Instance) Pop() (int, bool) {
 }
 
 // Copy creates a new copy of the stack.
-func (i *Instance) Copy() *Instance {
-	arr := i.Values()
+func (s *Stack) Copy() *Stack {
+	arr := s.Values()
 
 	// reverse the values slice
 	for i, j := 0, len(arr)-1; i < j; i, j = i+1, j-1 {

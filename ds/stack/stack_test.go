@@ -18,7 +18,7 @@ func TestNew(t *testing.T) {
 	}
 }
 
-func TestInstance_Len(t *testing.T) {
+func TestStack_Len(t *testing.T) {
 	newStack := stack.New()
 	if newStack.Len() != 0 {
 		t.Errorf("Len: expected Len to be 0, got %d", newStack.Len())
@@ -30,7 +30,7 @@ func TestInstance_Len(t *testing.T) {
 	}
 }
 
-func TestInstance_Empty(t *testing.T) {
+func TestStack_Empty(t *testing.T) {
 	newStack := stack.New()
 	if !newStack.Empty() {
 		t.Error("Empty: expected Empty to be true, got false")
@@ -42,7 +42,7 @@ func TestInstance_Empty(t *testing.T) {
 	}
 }
 
-func TestInstance_Clear(t *testing.T) {
+func TestStack_Clear(t *testing.T) {
 	newStack := stack.New(4, 5, 6)
 	newStack.Clear()
 	if newStack.Len() != 0 {
@@ -50,7 +50,7 @@ func TestInstance_Clear(t *testing.T) {
 	}
 }
 
-func TestInstance_Values(t *testing.T) {
+func TestStack_Values(t *testing.T) {
 	newStack := stack.New()
 	tmpArr := newStack.Values()
 	if len(tmpArr) != 0 {
@@ -64,7 +64,7 @@ func TestInstance_Values(t *testing.T) {
 	}
 }
 
-func TestInstance_Top(t *testing.T) {
+func TestStack_Top(t *testing.T) {
 	newStack := stack.New(4, 5, 6)
 	newStack.Push(7)
 	val, ok := newStack.Top()
@@ -84,7 +84,7 @@ func TestInstance_Top(t *testing.T) {
 	}
 }
 
-func TestInstance_Push(t *testing.T) {
+func TestStack_Push(t *testing.T) {
 	newStack := stack.New()
 	newStack.Push(4, 5, 6)
 	tmpArr := newStack.Values()
@@ -99,7 +99,7 @@ func TestInstance_Push(t *testing.T) {
 	}
 }
 
-func TestInstance_Pop(t *testing.T) {
+func TestStack_Pop(t *testing.T) {
 	newStack := stack.New(4, 5, 6)
 	newStack.Push(7)
 	val, ok := newStack.Pop()
@@ -119,7 +119,7 @@ func TestInstance_Pop(t *testing.T) {
 	}
 }
 
-func TestInstance_Copy(t *testing.T) {
+func TestStack_Copy(t *testing.T) {
 	newStack := stack.New(4, 5, 6)
 	copiedStack := newStack.Copy()
 	tmpArr := copiedStack.Values()

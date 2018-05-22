@@ -18,7 +18,7 @@ func TestNew(t *testing.T) {
 	}
 }
 
-func TestInstance_Len(t *testing.T) {
+func TestQueue_Len(t *testing.T) {
 	newQueue := queue.New()
 	if newQueue.Len() != 0 {
 		t.Errorf("Len: expected Len to be 0, got %d", newQueue.Len())
@@ -30,7 +30,7 @@ func TestInstance_Len(t *testing.T) {
 	}
 }
 
-func TestInstance_Empty(t *testing.T) {
+func TestQueue_Empty(t *testing.T) {
 	newQueue := queue.New()
 	if !newQueue.Empty() {
 		t.Error("Empty: expected Empty to be true, got false")
@@ -42,7 +42,7 @@ func TestInstance_Empty(t *testing.T) {
 	}
 }
 
-func TestInstance_Clear(t *testing.T) {
+func TestQueue_Clear(t *testing.T) {
 	newQueue := queue.New(4, 5, 6)
 	newQueue.Clear()
 	if newQueue.Len() != 0 {
@@ -50,7 +50,7 @@ func TestInstance_Clear(t *testing.T) {
 	}
 }
 
-func TestInstance_Values(t *testing.T) {
+func TestQueue_Values(t *testing.T) {
 	newQueue := queue.New()
 	tmpArr := newQueue.Values()
 	if len(tmpArr) != 0 {
@@ -64,7 +64,7 @@ func TestInstance_Values(t *testing.T) {
 	}
 }
 
-func TestInstance_Front(t *testing.T) {
+func TestQueue_Front(t *testing.T) {
 	newQueue := queue.New(4, 5, 6)
 	newQueue.Enqueue(7)
 	val, ok := newQueue.Front()
@@ -84,7 +84,7 @@ func TestInstance_Front(t *testing.T) {
 	}
 }
 
-func TestInstance_Enqueue(t *testing.T) {
+func TestQueue_Enqueue(t *testing.T) {
 	newQueue := queue.New()
 	newQueue.Enqueue(4, 5, 6)
 	tmpArr := newQueue.Values()
@@ -99,7 +99,7 @@ func TestInstance_Enqueue(t *testing.T) {
 	}
 }
 
-func TestInstance_Dequeue(t *testing.T) {
+func TestQueue_Dequeue(t *testing.T) {
 	newQueue := queue.New(4, 5, 6)
 	newQueue.Enqueue(7)
 	val, ok := newQueue.Dequeue()
@@ -119,7 +119,7 @@ func TestInstance_Dequeue(t *testing.T) {
 	}
 }
 
-func TestInstance_Copy(t *testing.T) {
+func TestQueue_Copy(t *testing.T) {
 	newQueue := queue.New(4, 5, 6)
 	copiedQueue := newQueue.Copy()
 	tmpArr := copiedQueue.Values()

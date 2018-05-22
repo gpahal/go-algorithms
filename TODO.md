@@ -3,7 +3,7 @@
 ## Algorithms
 - More Dynamic Programming examples
 - More Greedy Programming examples
-- More numerical algorithms ()linear algebra etc.)
+- More numerical algorithms (linear algebra etc.)
 - String algorithms (edit distance etc.)
 - Image manipulation algorithms (Delaunay triangulation etc.)
 

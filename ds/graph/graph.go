@@ -1,18 +1,20 @@
 package graph
 
-type ID int
-type Value int
-type Weight int
+type (
+	ID     int
+	Value  int
+	Weight int
+)
 
 type Node struct {
-	ID ID
+	ID    ID
 	Value Value
 }
 
 type Edge struct {
 	SourceID ID
 	TargetID ID
-	Weight Weight
+	Weight   Weight
 }
 
 type Graph struct {
@@ -51,7 +53,7 @@ func (g *Graph) HasNode(id ID) bool {
 
 func (g *Graph) AddNode(value Value) {
 	g.nodes[g.currID] = &Node{
-		ID: g.currID,
+		ID:    g.currID,
 		Value: value,
 	}
 
@@ -86,7 +88,7 @@ func (g *Graph) Edge(sourceID, targetID ID) *Edge {
 			return &Edge{
 				SourceID: sourceID,
 				TargetID: targetID,
-				Weight: w,
+				Weight:   w,
 			}
 		}
 	}
