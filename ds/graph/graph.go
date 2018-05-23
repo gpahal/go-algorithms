@@ -1,35 +1,29 @@
 package graph
 
-type (
-	ID     int
-	Value  int
-	Weight int
-)
-
 type Node struct {
-	ID    ID
-	Value Value
+	ID    int
+	Value int
 }
 
 type Edge struct {
-	SourceID ID
-	TargetID ID
-	Weight   Weight
+	SourceID int
+	TargetID int
+	Weight   int
 }
 
 type Graph struct {
-	nodes             map[ID]*Node
-	edges             map[ID]map[ID]Weight
-	edgesReverseIndex map[ID]map[ID]Weight
+	nodes             map[int]*Node
+	edges             map[int]map[int]int
+	edgesReverseIndex map[int]map[int]int
 
-	currID ID
+	currID int
 }
 
 func New() *Graph {
 	return &Graph{
-		nodes:             make(map[ID]*Node),
-		edges:             make(map[ID]map[ID]Weight),
-		edgesReverseIndex: make(map[ID]map[ID]Weight),
+		nodes:             make(map[int]*Node),
+		edges:             make(map[int]map[int]int),
+		edgesReverseIndex: make(map[int]map[int]int),
 		currID:            1,
 	}
 }
@@ -38,7 +32,7 @@ func (g *Graph) NodeCount() int {
 	return len(g.nodes)
 }
 
-func (g *Graph) Node(id ID) *Node {
+func (g *Graph) Node(id int) *Node {
 	node, ok := g.nodes[id]
 	if ok {
 		return node
@@ -47,11 +41,11 @@ func (g *Graph) Node(id ID) *Node {
 	return nil
 }
 
-func (g *Graph) HasNode(id ID) bool {
+func (g *Graph) HasNode(id int) bool {
 	return g.Node(id) != nil
 }
 
-func (g *Graph) AddNode(value Value) {
+func (g *Graph) AddNode(value int) {
 	g.nodes[g.currID] = &Node{
 		ID:    g.currID,
 		Value: value,
@@ -60,7 +54,7 @@ func (g *Graph) AddNode(value Value) {
 	g.currID++
 }
 
-func (g *Graph) UpdateNode(id ID, value Value) bool {
+func (g *Graph) UpdateNode(id, value int) bool {
 	node, ok := g.nodes[id]
 	if ok {
 		node.Value = value
@@ -70,7 +64,7 @@ func (g *Graph) UpdateNode(id ID, value Value) bool {
 	return false
 }
 
-func (g *Graph) DeleteNode(id ID) bool {
+func (g *Graph) DeleteNode(id int) bool {
 	_, ok := g.nodes[id]
 	if ok {
 		delete(g.nodes, id)
@@ -80,7 +74,7 @@ func (g *Graph) DeleteNode(id ID) bool {
 	return false
 }
 
-func (g *Graph) Edge(sourceID, targetID ID) *Edge {
+func (g *Graph) Edge(sourceID, targetID int) *Edge {
 	ett, ok := g.edges[sourceID]
 	if ok {
 		w, ok := ett[targetID]
@@ -96,11 +90,11 @@ func (g *Graph) Edge(sourceID, targetID ID) *Edge {
 	return nil
 }
 
-func (g *Graph) HasEdge(sourceID, targetID ID) bool {
+func (g *Graph) HasEdge(sourceID, targetID int) bool {
 	return g.Edge(sourceID, targetID) != nil
 }
 
-func (g *Graph) AddEdge(sourceID, targetID ID, weight Weight) bool {
+func (g *Graph) AddEdge(sourceID, targetID, weight int) bool {
 	_, ok := g.nodes[sourceID]
 	if !ok {
 		return false
@@ -120,7 +114,7 @@ func (g *Graph) AddEdge(sourceID, targetID ID, weight Weight) bool {
 
 		ett[targetID] = weight
 	} else {
-		ett := make(map[ID]Weight, 1)
+		ett := make(map[int]int, 1)
 		ett[targetID] = weight
 
 		g.edges[sourceID] = ett
@@ -130,7 +124,7 @@ func (g *Graph) AddEdge(sourceID, targetID ID, weight Weight) bool {
 	if ok {
 		ett[sourceID] = weight
 	} else {
-		ett := make(map[ID]Weight, 1)
+		ett := make(map[int]int, 1)
 		ett[sourceID] = weight
 
 		g.edgesReverseIndex[targetID] = ett
@@ -139,7 +133,7 @@ func (g *Graph) AddEdge(sourceID, targetID ID, weight Weight) bool {
 	return true
 }
 
-func (g *Graph) UpdateEdge(sourceID, targetID ID, weight Weight) bool {
+func (g *Graph) UpdateEdge(sourceID, targetID, weight int) bool {
 	_, ok := g.nodes[sourceID]
 	if !ok {
 		return false
@@ -169,7 +163,7 @@ func (g *Graph) UpdateEdge(sourceID, targetID ID, weight Weight) bool {
 	return true
 }
 
-func (g *Graph) AddOrUpdateEdge(sourceID, targetID ID, weight Weight) bool {
+func (g *Graph) AddOrUpdateEdge(sourceID, targetID, weight int) bool {
 	_, ok := g.nodes[sourceID]
 	if !ok {
 		return false
@@ -182,7 +176,7 @@ func (g *Graph) AddOrUpdateEdge(sourceID, targetID ID, weight Weight) bool {
 
 	ett, ok := g.edges[sourceID]
 	if ok {
-		var w Weight
+		var w int
 		w, ok = ett[targetID]
 		if ok {
 			// Edge already present.
@@ -197,7 +191,7 @@ func (g *Graph) AddOrUpdateEdge(sourceID, targetID ID, weight Weight) bool {
 
 		ett[targetID] = weight
 	} else {
-		ett := make(map[ID]Weight, 1)
+		ett := make(map[int]int, 1)
 		ett[targetID] = weight
 
 		g.edges[sourceID] = ett
@@ -207,7 +201,7 @@ func (g *Graph) AddOrUpdateEdge(sourceID, targetID ID, weight Weight) bool {
 	if ok {
 		ett[sourceID] = weight
 	} else {
-		ett := make(map[ID]Weight, 1)
+		ett := make(map[int]int, 1)
 		ett[sourceID] = weight
 
 		g.edgesReverseIndex[targetID] = ett
