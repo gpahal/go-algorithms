@@ -1,75 +1,26 @@
 package stack
 
-import (
-	"github.com/gpahal/go-algorithms/ds/list"
-)
+// Interface is the interface that groups the basic methods of a stack implementation.
+type Interface interface {
+	// Length returns the number of items in the stack.
+	Len() int
 
-// Stack represents a stack instance implemented as a singly linked list.
-type Stack struct {
-	l *list.SinglyLinkedList
-}
+	// Empty checks whether the stack is empty.
+	Empty() bool
 
-// New returns a new stack instance with the given items pushed into it.
-func New(items ...int) *Stack {
-	s := &Stack{l: &list.SinglyLinkedList{}}
-	s.Push(items...)
-	return s
-}
+	// Clear deletes all the items from the stack.
+	Clear()
 
-// Len returns the number of items in the stack.
-func (s *Stack) Len() int {
-	return s.l.Len()
-}
+	// Top returns the top/last pushed element of the stack. If the stack is empty, second return value is false.
+	Top() (int, bool)
 
-// Empty checks whether the stack is empty.
-func (s *Stack) Empty() bool {
-	return s.l.Empty()
-}
+	// Push pushes the given items to the stack.
+	Push(items ...int)
 
-// Clear deletes all the items from the stack.
-func (s *Stack) Clear() {
-	s.l.Clear()
-}
+	// Pop pops out an item from the stack in LIFO (Last In First Out) order. If the stack is empty, second return value is
+	// false.
+	Pop() (int, bool)
 
-// Values returns a slice of the items of the stack.
-func (s *Stack) Values() []int {
-	return s.l.Values()
-}
-
-// Top returns the top/last pushed element of the stack. If the stack is empty, second return value is false.
-func (s *Stack) Top() (int, bool) {
-	el := s.l.First()
-	if el == nil {
-		return 0, false
-	}
-
-	return el.Value, true
-}
-
-// Push pushes the given items to the stack.
-func (s *Stack) Push(items ...int) {
-	s.l.PushFront(items...)
-}
-
-// Pop pops out an item from the stack in LIFO (Last In First Out) order. If the stack is empty, second return value is
-// false.
-func (s *Stack) Pop() (int, bool) {
-	el := s.l.PopFront()
-	if el == nil {
-		return 0, false
-	}
-
-	return el.Value, true
-}
-
-// Copy creates a new copy of the stack.
-func (s *Stack) Copy() *Stack {
-	arr := s.Values()
-
-	// reverse the values slice
-	for i, j := 0, len(arr)-1; i < j; i, j = i+1, j-1 {
-		arr[i], arr[j] = arr[j], arr[i]
-	}
-
-	return New(arr...)
+	// Copy creates a new copy of the stack.
+	Copy() Interface
 }
