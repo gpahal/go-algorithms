@@ -17,7 +17,7 @@ func testInterfaceHelper(t *testing.T, newFn func(items ...int) stack.Interface)
 	})
 
 	t.Run("Len", func(t *testing.T) {
-		newStack := stack.New()
+		newStack := newFn()
 		if newStack.Len() != 0 {
 			t.Errorf("Len: expected Len to be 0, got %d", newStack.Len())
 		}
@@ -29,7 +29,7 @@ func testInterfaceHelper(t *testing.T, newFn func(items ...int) stack.Interface)
 	})
 
 	t.Run("Empty", func(t *testing.T) {
-		newStack := stack.New()
+		newStack := newFn()
 		if !newStack.Empty() {
 			t.Error("Empty: expected Empty to be true, got false")
 		}
@@ -41,7 +41,7 @@ func testInterfaceHelper(t *testing.T, newFn func(items ...int) stack.Interface)
 	})
 
 	t.Run("Clear", func(t *testing.T) {
-		newStack := stack.New(4, 5, 6)
+		newStack := newFn(4, 5, 6)
 		newStack.Clear()
 		if newStack.Len() != 0 {
 			t.Errorf("Clear: expected Len to be 0, got %d", newStack.Len())
@@ -49,7 +49,7 @@ func testInterfaceHelper(t *testing.T, newFn func(items ...int) stack.Interface)
 	})
 
 	t.Run("Top", func(t *testing.T) {
-		newStack := stack.New(4, 5, 6)
+		newStack := newFn(4, 5, 6)
 		newStack.Push(7)
 		val, ok := newStack.Top()
 		if !ok || val != 7 {
@@ -65,7 +65,7 @@ func testInterfaceHelper(t *testing.T, newFn func(items ...int) stack.Interface)
 	})
 
 	t.Run("Push", func(t *testing.T) {
-		newStack := stack.New()
+		newStack := newFn()
 		newStack.Push(4, 5, 6)
 		assertStackValues(t, "Push 4, 5, 6", newStack, []int{6, 5, 4})
 		newStack.Push(7)
@@ -73,7 +73,7 @@ func testInterfaceHelper(t *testing.T, newFn func(items ...int) stack.Interface)
 	})
 
 	t.Run("Pop", func(t *testing.T) {
-		newStack := stack.New(4, 5, 6)
+		newStack := newFn(4, 5, 6)
 		newStack.Push(7)
 		val, ok := newStack.Pop()
 		if !ok || val != 7 {
@@ -89,7 +89,7 @@ func testInterfaceHelper(t *testing.T, newFn func(items ...int) stack.Interface)
 	})
 
 	t.Run("Copy", func(t *testing.T) {
-		newStack := stack.New(4, 5, 6)
+		newStack := newFn(4, 5, 6)
 		copiedStack := newStack.Copy()
 		assertStackValues(t, "Copy", newStack, []int{6, 5, 4})
 		copiedStack.Push(3)

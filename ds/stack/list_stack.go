@@ -9,8 +9,8 @@ type ListStack struct {
 	l *list.SinglyLinkedList
 }
 
-// New returns a new stack instance with the given items pushed into it.
-func New(items ...int) Interface {
+// NewListStack returns a new list stack instance with the given items pushed into it.
+func NewListStack(items ...int) Interface {
 	s := &ListStack{l: &list.SinglyLinkedList{}}
 	s.Push(items...)
 	return s
@@ -31,7 +31,8 @@ func (s *ListStack) Clear() {
 	s.l.Clear()
 }
 
-// Top returns the top/last pushed element of the stack. If the stack is empty, second return value is false.
+// Top returns the top/last pushed element of the stack. If the stack is empty, second return
+// value is false.
 func (s *ListStack) Top() (int, bool) {
 	el := s.l.First()
 	if el == nil {
@@ -46,8 +47,8 @@ func (s *ListStack) Push(items ...int) {
 	s.l.PushFront(items...)
 }
 
-// Pop pops out an item from the stack in LIFO (Last In First Out) order. If the stack is empty, second return value is
-// false.
+// Pop pops out an item from the stack in LIFO (Last In First Out) order. If the stack is empty,
+// second return value is false.
 func (s *ListStack) Pop() (int, bool) {
 	el := s.l.PopFront()
 	if el == nil {
@@ -66,5 +67,5 @@ func (s *ListStack) Copy() Interface {
 		arr[i], arr[j] = arr[j], arr[i]
 	}
 
-	return New(arr...)
+	return NewListStack(arr...)
 }

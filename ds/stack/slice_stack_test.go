@@ -6,6 +6,6 @@ import (
 	"github.com/gpahal/go-algorithms/ds/stack"
 )
 
-func TestListStack(t *testing.T) {
-	testInterfaceHelper(t, stack.NewListStack)
+func TestSliceStack(t *testing.T) {
+	testInterfaceHelper(t, stack.NewSliceStack)
 }
