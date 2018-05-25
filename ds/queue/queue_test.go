@@ -6,137 +6,113 @@ import (
 	"github.com/gpahal/go-algorithms/ds/queue"
 )
 
-func TestNew(t *testing.T) {
-	newQueue := queue.New(4, 5, 6)
-	if newQueue.Len() != 3 {
-		t.Errorf("New 4, 5, 6: expected Len to be 3, got %d", newQueue.Len())
-	}
+func testInterfaceHelper(t *testing.T, newFn func(items ...int) queue.Interface) {
+	t.Run("New", func(t *testing.T) {
+		newQueue := newFn(4, 5, 6)
+		if newQueue.Len() != 3 {
+			t.Errorf("New 4, 5, 6: expected Len to be 3, got %d", newQueue.Len())
+		}
 
-	tmpArr := newQueue.Values()
-	if !slicesEqual(tmpArr, []int{4, 5, 6}) {
-		t.Errorf("New 4, 5, 6: expected Values to be [4 5 6], got %v", tmpArr)
-	}
+		assertQueueValues(t, "New 4, 5, 6", newQueue, []int{4, 5, 6})
+	})
+
+	t.Run("Len", func(t *testing.T) {
+		newQueue := newFn()
+		if newQueue.Len() != 0 {
+			t.Errorf("Len: expected Len to be 0, got %d", newQueue.Len())
+		}
+
+		newQueue.Enqueue(4, 5, 6)
+		if newQueue.Len() != 3 {
+			t.Errorf("Len: expected Len to be 3, got %d", newQueue.Len())
+		}
+	})
+
+	t.Run("Empty", func(t *testing.T) {
+		newQueue := newFn()
+		if !newQueue.Empty() {
+			t.Error("Empty: expected Empty to be true, got false")
+		}
+
+		newQueue.Enqueue(4, 5, 6)
+		if newQueue.Empty() {
+			t.Error("Empty: expected Empty to be false, got true")
+		}
+	})
+
+	t.Run("Clear", func(t *testing.T) {
+		newQueue := newFn(4, 5, 6)
+		newQueue.Clear()
+		if newQueue.Len() != 0 {
+			t.Errorf("Clear: expected Len to be 0, got %d", newQueue.Len())
+		}
+	})
+
+	t.Run("Front", func(t *testing.T) {
+		newQueue := newFn(4, 5, 6)
+		newQueue.Enqueue(7)
+		val, ok := newQueue.Front()
+		if !ok || val != 4 {
+			t.Errorf("Frint: expected Front to return (4, true), got (%d, %t)", val, ok)
+		}
+
+		assertQueueValues(t, "Front", newQueue, []int{4, 5, 6, 7})
+		newQueue.Clear()
+		val, ok = newQueue.Front()
+		if ok || val != 0 {
+			t.Errorf("Front: expected Front to return (0, false), got (%d, %t)", val, ok)
+		}
+	})
+
+	t.Run("Enqueue", func(t *testing.T) {
+		newQueue := newFn()
+		newQueue.Enqueue(4, 5, 6)
+		assertQueueValues(t, "Enqueue 4, 5, 6", newQueue, []int{4, 5, 6})
+		newQueue.Enqueue(7)
+		assertQueueValues(t, "Enqueue 7", newQueue, []int{4, 5, 6, 7})
+	})
+
+	t.Run("Dequeue", func(t *testing.T) {
+		newQueue := newFn(4, 5, 6)
+		newQueue.Enqueue(7)
+		val, ok := newQueue.Dequeue()
+		if !ok || val != 4 {
+			t.Errorf("Dequeue: expected Dequeue to return (4, true), got (%d, %t)", val, ok)
+		}
+
+		assertQueueValues(t, "Dequeue", newQueue, []int{5, 6, 7})
+		newQueue.Clear()
+		val, ok = newQueue.Dequeue()
+		if ok || val != 0 {
+			t.Errorf("Dequeue: expected Dequeue to return (0, false), got (%d, %t)", val, ok)
+		}
+	})
+
+	t.Run("Copy", func(t *testing.T) {
+		newQueue := newFn(4, 5, 6)
+		copiedQueue := newQueue.Copy()
+		assertQueueValues(t, "Copy", newQueue, []int{4, 5, 6})
+		copiedQueue.Enqueue(3)
+		assertQueueValues(t, "Copy", copiedQueue, []int{4, 5, 6, 3})
+		assertQueueValues(t, "Copy", newQueue, []int{4, 5, 6})
+	})
 }
 
-func TestQueue_Len(t *testing.T) {
-	newQueue := queue.New()
-	if newQueue.Len() != 0 {
-		t.Errorf("Len: expected Len to be 0, got %d", newQueue.Len())
+func assertQueueValues(t *testing.T, name string, q queue.Interface, expected []int) {
+	var got []int
+	for {
+		val, ok := q.Dequeue()
+		if !ok {
+			break
+		}
+
+		got = append(got, val)
 	}
 
-	newQueue.Enqueue(4, 5, 6)
-	if newQueue.Len() != 3 {
-		t.Errorf("Len: expected Len to be 3, got %d", newQueue.Len())
+	if !slicesEqual(expected, got) {
+		t.Errorf("%s: expected Queue values to be %v, got %v", name, expected, got)
 	}
-}
-
-func TestQueue_Empty(t *testing.T) {
-	newQueue := queue.New()
-	if !newQueue.Empty() {
-		t.Error("Empty: expected Empty to be true, got false")
-	}
-
-	newQueue.Enqueue(4, 5, 6)
-	if newQueue.Empty() {
-		t.Error("Empty: expected Empty to be false, got true")
-	}
-}
-
-func TestQueue_Clear(t *testing.T) {
-	newQueue := queue.New(4, 5, 6)
-	newQueue.Clear()
-	if newQueue.Len() != 0 {
-		t.Errorf("Clear: expected Len to be 0, got %d", newQueue.Len())
-	}
-}
-
-func TestQueue_Values(t *testing.T) {
-	newQueue := queue.New()
-	tmpArr := newQueue.Values()
-	if len(tmpArr) != 0 {
-		t.Errorf("Values: expected Values to be [], got %#v", tmpArr)
-	}
-
-	newQueue.Enqueue(4, 5, 6)
-	tmpArr = newQueue.Values()
-	if !slicesEqual(tmpArr, []int{4, 5, 6}) {
-		t.Errorf("Values: expected Values to be [4 5 6], got %v", tmpArr)
-	}
-}
-
-func TestQueue_Front(t *testing.T) {
-	newQueue := queue.New(4, 5, 6)
-	newQueue.Enqueue(7)
-	val, ok := newQueue.Front()
-	if !ok || val != 4 {
-		t.Errorf("Front: expected Front to return (4, true), got (%d, %t)", val, ok)
-	}
-
-	tmpArr := newQueue.Values()
-	if !slicesEqual(tmpArr, []int{4, 5, 6, 7}) {
-		t.Errorf("Front: expected Values to be [4 5 6 7], got %v", tmpArr)
-	}
-
-	newQueue.Clear()
-	val, ok = newQueue.Front()
-	if ok || val != 0 {
-		t.Errorf("Front: expected Front to return (0, false), got (%d, %t)", val, ok)
-	}
-}
-
-func TestQueue_Enqueue(t *testing.T) {
-	newQueue := queue.New()
-	newQueue.Enqueue(4, 5, 6)
-	tmpArr := newQueue.Values()
-	if !slicesEqual(tmpArr, []int{4, 5, 6}) {
-		t.Errorf("Enqueue 4, 5, 6: expected Values to be [4 5 6], got %v", tmpArr)
-	}
-
-	newQueue.Enqueue(7)
-	tmpArr = newQueue.Values()
-	if !slicesEqual(tmpArr, []int{4, 5, 6, 7}) {
-		t.Errorf("Enqueue 7: expected Values to be [4 5 6 7], got %v", tmpArr)
-	}
-}
-
-func TestQueue_Dequeue(t *testing.T) {
-	newQueue := queue.New(4, 5, 6)
-	newQueue.Enqueue(7)
-	val, ok := newQueue.Dequeue()
-	if !ok || val != 4 {
-		t.Errorf("Dequeue: expected Dequeue to return (4, true), got (%d, %t)", val, ok)
-	}
-
-	tmpArr := newQueue.Values()
-	if !slicesEqual(tmpArr, []int{5, 6, 7}) {
-		t.Errorf("Dequeue: expected Values to be [5 6 7], got %v", tmpArr)
-	}
-
-	newQueue.Clear()
-	val, ok = newQueue.Dequeue()
-	if ok || val != 0 {
-		t.Errorf("Dequeue: expected Dequeue to return (0, false), got (%d, %t)", val, ok)
-	}
-}
-
-func TestQueue_Copy(t *testing.T) {
-	newQueue := queue.New(4, 5, 6)
-	copiedQueue := newQueue.Copy()
-	tmpArr := copiedQueue.Values()
-	if !slicesEqual(tmpArr, []int{4, 5, 6}) {
-		t.Errorf("Copy: expected Values to be [4 5 6], got %v", tmpArr)
-	}
-
-	copiedQueue.Enqueue(3)
-	tmpArr = copiedQueue.Values()
-	if !slicesEqual(tmpArr, []int{4, 5, 6, 3}) {
-		t.Errorf("Copy: expected Values to be [4 5 6 3], got %v", tmpArr)
-	}
-
-	tmpArr = newQueue.Values()
-	if !slicesEqual(tmpArr, []int{4, 5, 6}) {
-		t.Errorf("Copy: expected Values of original queue to be [4 5 6], got %v", tmpArr)
-	}
+	q.Enqueue(got...)
 }
 
 func slicesEqual(arr1 []int, arr2 []int) bool {
