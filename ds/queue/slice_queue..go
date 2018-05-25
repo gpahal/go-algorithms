@@ -1,6 +1,6 @@
 package queue
 
-// SliceQueue represents a queue instance implemented as a slice used ascircular buffer.
+// SliceQueue represents a queue instance implemented using a slice used as a circular buffer.
 type SliceQueue struct {
 	arr   []int
 	start int

@@ -1,6 +1,6 @@
 package stack
 
-// SliceStack represents a stack instance implemented as a slice used ascircular buffer.
+// SliceStack represents a stack instance implemented using a slice.
 type SliceStack struct {
 	arr []int
 }
