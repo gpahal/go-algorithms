@@ -9,7 +9,7 @@ type ListQueue struct {
 	l *list.SinglyLinkedList
 }
 
-// NewListQueue returns a new list queue instance with the given items pushed into it.
+// NewListQueue returns a new list queue instance with the given items enqueued into it.
 func NewListQueue(items ...int) Interface {
 	q := &ListQueue{l: &list.SinglyLinkedList{}}
 	q.Enqueue(items...)
@@ -31,7 +31,7 @@ func (q *ListQueue) Clear() {
 	q.l.Clear()
 }
 
-// Front returns the front/oldest enqueued element of the stack. If the queue is empty, second
+// Front returns the front/oldest enqueued element of the queue. If the queue is empty, second
 // return value is false.
 func (q *ListQueue) Front() (int, bool) {
 	el := q.l.First()

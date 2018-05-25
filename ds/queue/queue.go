@@ -11,7 +11,7 @@ type Interface interface {
 	// Clear deletes all the items from the queue.
 	Clear()
 
-	// Front returns the front/oldest enqueued element of the stack. If the queue is empty, second
+	// Front returns the front/oldest enqueued element of the queue. If the queue is empty, second
 	// return value is false.
 	Front() (int, bool)
 
