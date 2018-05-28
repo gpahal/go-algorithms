@@ -117,7 +117,7 @@ func assertStackValues(t *testing.T, name string, s stack.Interface, expected []
 	}
 }
 
-func slicesEqual(arr1 []int, arr2 []int) bool {
+func slicesEqual(arr1, arr2 []int) bool {
 	if len(arr1) != len(arr2) {
 		return false
 	}

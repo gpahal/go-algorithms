@@ -51,7 +51,7 @@ func TestSieveOfEratosthenesDynamic(t *testing.T) {
 	}
 }
 
-func slicesEqual(arr1 []bool, arr2 []bool) bool {
+func slicesEqual(arr1, arr2 []bool) bool {
 	if arr1 == nil && arr2 == nil {
 		return true
 	}

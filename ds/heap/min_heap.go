@@ -5,20 +5,24 @@ type MinHeap struct {
 	arr []int
 }
 
+// NewMinHeap returns a new min heap instance with the given items inserted into it.
 func NewMinHeap(values ...int) *MinHeap {
 	h := &MinHeap{arr: make([]int, 0, len(values))}
 	h.Insert(values...)
 	return h
 }
 
+// Len returns the number of items in the heap.
 func (h *MinHeap) Len() int {
 	return len(h.arr)
 }
 
+// Empty checks whether the heap is empty.
 func (h *MinHeap) Empty() bool {
 	return len(h.arr) == 0
 }
 
+// Clear deletes all the items from the heap.
 func (h *MinHeap) Clear() {
 	h.arr = h.arr[:0]
 	return
@@ -54,6 +58,7 @@ func (h *MinHeap) heapifyDown(idx int) {
 	}
 }
 
+// Min returns the minimum value in the heap.
 func (h *MinHeap) Min() (int, bool) {
 	if len(h.arr) == 0 {
 		return 0, false
@@ -61,6 +66,7 @@ func (h *MinHeap) Min() (int, bool) {
 	return h.arr[0], true
 }
 
+// Find returns the index of value in the heap. If the value is not found, -1 is returned.
 func (h *MinHeap) Find(value int) int {
 	if len(h.arr) == 0 {
 		return -1
@@ -88,6 +94,7 @@ func (h *MinHeap) findHelper(idx, value int) int {
 	return h.findHelper(idx*2+2, value)
 }
 
+// Insert inserts the given items to the heap.
 func (h *MinHeap) Insert(values ...int) {
 	for _, value := range values {
 		h.arr = append(h.arr, value)
@@ -95,6 +102,7 @@ func (h *MinHeap) Insert(values ...int) {
 	}
 }
 
+// UpdateAt updates the item at the given index.
 func (h *MinHeap) UpdateAt(idx, newValue int) {
 	if idx < 0 || idx >= len(h.arr) {
 		return
@@ -109,6 +117,8 @@ func (h *MinHeap) UpdateAt(idx, newValue int) {
 	}
 }
 
+// ExtractMin removes the minimum value from the heap and returns it. If the heap is empty, the
+// second return value is false.
 func (h *MinHeap) ExtractMin() (int, bool) {
 	if len(h.arr) == 0 {
 		return 0, false
@@ -126,6 +136,8 @@ func (h *MinHeap) ExtractMin() (int, bool) {
 	return v, true
 }
 
+// ExtractAt removes the value at index from the heap and returns it. If the heap doesn't enough
+// elements, the second return value is false.
 func (h *MinHeap) ExtractAt(idx int) (int, bool) {
 	if idx < 0 || idx >= len(h.arr) {
 		return 0, false
@@ -141,6 +153,7 @@ func (h *MinHeap) ExtractAt(idx int) (int, bool) {
 	return v, true
 }
 
+// Copy creates a new copy of the heap.
 func (h *MinHeap) Copy() *MinHeap {
 	return NewMinHeap(h.arr...)
 }

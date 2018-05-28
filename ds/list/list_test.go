@@ -266,7 +266,7 @@ func testInterfaceHelper(newFn func(...int) list.Interface, t *testing.T) {
 	}
 }
 
-func slicesEqual(arr1 []int, arr2 []int) bool {
+func slicesEqual(arr1, arr2 []int) bool {
 	if len(arr1) != len(arr2) {
 		return false
 	}

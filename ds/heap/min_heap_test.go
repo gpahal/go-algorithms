@@ -12,7 +12,7 @@ func TestNewMinHeap(t *testing.T) {
 		t.Errorf("NewMinHeap 4, 5, 6: expected Len to be 3, got %d", newHeap.Len())
 	}
 
-	testMinHeap(t, "NewMinHeap", newHeap, []int{4, 5, 6})
+	assertMinHeap(t, "NewMinHeap", newHeap, []int{4, 5, 6})
 }
 
 func TestMinHeap_Len(t *testing.T) {
@@ -114,19 +114,19 @@ func TestMinHeap_Insert(t *testing.T) {
 	}
 
 	newHeap.Insert(2, 8, 6, 4, 3)
-	testMinHeap(t, "Insert", newHeap, []int{2, 3, 4, 4, 6, 8})
+	assertMinHeap(t, "Insert", newHeap, []int{2, 3, 4, 4, 6, 8})
 }
 
 func TestMinHeap_UpdateAt(t *testing.T) {
 	newHeap := heap.NewMinHeap(2)
 	newHeap.UpdateAt(0, 1)
-	testMinHeap(t, "DecreaseIndex", newHeap, []int{1})
+	assertMinHeap(t, "DecreaseIndex", newHeap, []int{1})
 
 	newHeap.Insert(2, 3, 8, 1, 9, 7)
-	testMinHeap(t, "DecreaseIndex", newHeap, []int{1, 1, 2, 3, 7, 8, 9})
+	assertMinHeap(t, "DecreaseIndex", newHeap, []int{1, 1, 2, 3, 7, 8, 9})
 
 	newHeap.UpdateAt(0, 5)
-	testMinHeap(t, "DecreaseIndex", newHeap, []int{1, 2, 3, 5, 7, 8, 9})
+	assertMinHeap(t, "DecreaseIndex", newHeap, []int{1, 2, 3, 5, 7, 8, 9})
 
 	idx := newHeap.Find(3)
 	if idx < 0 {
@@ -134,21 +134,21 @@ func TestMinHeap_UpdateAt(t *testing.T) {
 	}
 
 	newHeap.UpdateAt(idx, 0)
-	testMinHeap(t, "DecreaseIndex", newHeap, []int{0, 1, 2, 5, 7, 8, 9})
+	assertMinHeap(t, "DecreaseIndex", newHeap, []int{0, 1, 2, 5, 7, 8, 9})
 }
 
 func TestMinHeap_Copy(t *testing.T) {
 	newHeap := heap.NewMinHeap(4, 5, 6)
 	copiedHeap := newHeap.Copy()
-	testMinHeap(t, "Copy", copiedHeap, []int{4, 5, 6})
+	assertMinHeap(t, "Copy", copiedHeap, []int{4, 5, 6})
 
 	copiedHeap.Insert(3)
-	testMinHeap(t, "Copy", copiedHeap, []int{3, 4, 5, 6})
+	assertMinHeap(t, "Copy", copiedHeap, []int{3, 4, 5, 6})
 
-	testMinHeap(t, "Copy", newHeap, []int{4, 5, 6})
+	assertMinHeap(t, "Copy", newHeap, []int{4, 5, 6})
 }
 
-func testMinHeap(t *testing.T, name string, h *heap.MinHeap, expected []int) {
+func assertMinHeap(t *testing.T, name string, h *heap.MinHeap, expected []int) {
 	var got []int
 	for {
 		val, ok := h.ExtractMin()
@@ -165,7 +165,7 @@ func testMinHeap(t *testing.T, name string, h *heap.MinHeap, expected []int) {
 	h.Insert(got...)
 }
 
-func slicesEqual(arr1 []int, arr2 []int) bool {
+func slicesEqual(arr1, arr2 []int) bool {
 	if len(arr1) != len(arr2) {
 		return false
 	}

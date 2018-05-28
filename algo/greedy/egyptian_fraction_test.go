@@ -29,7 +29,7 @@ func TestEgyptianFraction(t *testing.T) {
 	}
 }
 
-func slicesEquals(arr1 []int, arr2 []int) bool {
+func slicesEquals(arr1, arr2 []int) bool {
 	if arr1 == nil && arr2 == nil {
 		return true
 	}

@@ -115,7 +115,7 @@ func assertQueueValues(t *testing.T, name string, q queue.Interface, expected []
 	q.Enqueue(got...)
 }
 
-func slicesEqual(arr1 []int, arr2 []int) bool {
+func slicesEqual(arr1, arr2 []int) bool {
 	if len(arr1) != len(arr2) {
 		return false
 	}
