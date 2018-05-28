@@ -77,31 +77,31 @@ func TestMinHeap_Find(t *testing.T) {
 	newHeap := heap.NewMinHeap()
 	idx := newHeap.Find(4)
 	if idx >= 0 {
-		t.Errorf("Find: expected Find to return -1, got %d", idx)
+		t.Errorf("Find 4: expected Find to return -1, got %d", idx)
 	}
 
 	newHeap.Insert(4)
 	idx = newHeap.Find(4)
 	if idx != 0 {
-		t.Errorf("Find: expected Find to return 0, got %d", idx)
+		t.Errorf("Find 4: expected Find to return 0, got %d", idx)
 	}
 
 	newHeap.Insert(7)
 	idx = newHeap.Find(7)
 	if idx != 1 {
-		t.Errorf("Find: expected Find to return 1, got %d", idx)
+		t.Errorf("Find 7: expected Find to return 1, got %d", idx)
 	}
 
 	newHeap.ExtractMin()
 	idx = newHeap.Find(4)
 	if idx >= 0 {
-		t.Errorf("Find: expected Find to return -1, got %d", idx)
+		t.Errorf("Find 4: expected Find to return -1, got %d", idx)
 	}
 
 	newHeap.Insert(6)
 	idx = newHeap.Find(6)
 	if idx != 0 {
-		t.Errorf("Find: expected Find to return 0, got %d", idx)
+		t.Errorf("Find 6: expected Find to return 0, got %d", idx)
 	}
 }
 
@@ -160,7 +160,7 @@ func assertMinHeap(t *testing.T, name string, h *heap.MinHeap, expected []int) {
 	}
 
 	if !slicesEqual(expected, got) {
-		t.Errorf("%s: expected Values to be %v, got %v", name, expected, got)
+		t.Errorf("%s: expected MinHeap values to be %v, got %v", name, expected, got)
 	}
 	h.Insert(got...)
 }
