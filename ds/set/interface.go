@@ -2,8 +2,8 @@ package set
 
 // Interface is the interface that groups the basic methods of a set implementation.
 type Interface interface {
-	// Size returns the number of items in the set.
-	Size() int
+	// Len returns the number of items in the set.
+	Len() int
 
 	// Empty checks whether the set is empty.
 	Empty() bool
@@ -11,14 +11,14 @@ type Interface interface {
 	// Clear deletes all the items from the set.
 	Clear()
 
-	// Values returns a slice of the items of the set.
-	Values() []int
-
 	// Each iterates over the items of the set.
 	Each(fn func(int) bool)
 
 	// Iterator returns a set.Iterable that can be used to iterate over the set.
 	Iterator() Iterable
+
+	// Contains checks whether the set contains all the given items.
+	Contains(items ...int) bool
 
 	// Add adds the given items to the set.
 	Add(items ...int)
@@ -26,17 +26,16 @@ type Interface interface {
 	// Delete deletes the given items from the set.
 	Delete(items ...int)
 
-	// Contains checks whether the set contains all the given items.
-	Contains(items ...int) bool
-
 	// Copy creates a new copy of the set.
 	Copy() Interface
 }
 
-// Iterable is the interface that groups the Next and Value methods used to iterate over a set.Interface.
+// Iterable is the interface that groups the Next and Value methods used to iterate over a
+// set.Interface.
 type Iterable interface {
-	// Next prepares the next item for reading with the Value method. It returns true on success, or false if there
-	// are no items left, after which the Value method would always return the zero value.
+	// Next prepares the next item for reading with the Value method. It returns true on success,
+	// or false if there are no items left, after which the Value method would always return the
+	// zero value.
 	//
 	// Every call to Value, even the first one, must be preceded by a call to Next.
 	Next() bool
@@ -47,7 +46,7 @@ type Iterable interface {
 
 // AreEqual checks whether the two sets have the same items.
 func AreEqual(set1, set2 Interface) bool {
-	if set1.Size() != set2.Size() {
+	if set1.Len() != set2.Len() {
 		return false
 	}
 
@@ -66,7 +65,7 @@ func AreEqual(set1, set2 Interface) bool {
 
 // IsSubset checks whether the first set is the subset of the second.
 func IsSubset(subSet, superSet Interface) bool {
-	if subSet.Size() > superSet.Size() {
+	if subSet.Len() > superSet.Len() {
 		return false
 	}
 
@@ -90,7 +89,7 @@ func IsSuperset(superSet, subSet Interface) bool {
 
 // AreDisjoint checks whether the two sets are disjoint.
 func AreDisjoint(set1, set2 Interface) bool {
-	if set1.Size() == 0 {
+	if set1.Len() == 0 {
 		return true
 	}
 
@@ -109,7 +108,10 @@ func AreDisjoint(set1, set2 Interface) bool {
 
 // MergeInto adds all the items of the second set to the first.
 func MergeInto(mainSet, otherSet Interface) {
-	mainSet.Add(otherSet.Values()...)
+	otherSet.Each(func(item int) bool {
+		mainSet.Add(item)
+		return false
+	})
 }
 
 // RetainOnly deletes all the items from the first set that are not in the second.
@@ -125,12 +127,16 @@ func RetainOnly(mainSet, otherSet Interface) {
 
 // SeparateFrom deletes all the items from the first set that are also in the second.
 func SeparateFrom(mainSet, otherSet Interface) {
-	mainSet.Delete(otherSet.Values()...)
+	otherSet.Each(func(item int) bool {
+		mainSet.Delete(item)
+		return false
+	})
 }
 
-// Union returns a new set which is a union of the given sets. If no sets are provided, an empty set is returned.
+// Union returns a new set which is a union of the given sets. If no sets are provided, an empty
+// set is returned.
 func Union(sets ...Interface) Interface {
-	newSet := NewHashSet()
+	newSet := NewNativeSet()
 	for _, set := range sets {
 		MergeInto(newSet, set)
 	}
@@ -138,11 +144,11 @@ func Union(sets ...Interface) Interface {
 	return newSet
 }
 
-// Intersection returns a new set which is an intersection of the given sets. If no sets are provided, an empty set is
-// returned.
+// Intersection returns a new set which is an intersection of the given sets. If no sets are
+// provided, an empty set is returned.
 func Intersection(sets ...Interface) Interface {
 	if len(sets) == 0 {
-		return NewHashSet()
+		return NewNativeSet()
 	}
 
 	newSet := sets[0].Copy()
@@ -154,11 +160,11 @@ func Intersection(sets ...Interface) Interface {
 	return newSet
 }
 
-// Difference returns a new set which is the first set minus all the other sets. If only one set is provided, a copy of
-// that set is returned. If no sets are provided, an empty set is returned.
+// Difference returns a new set which is the first set minus all the other sets. If only one set
+// is provided, a copy of that set is returned. If no sets are provided, an empty set is returned.
 func Difference(sets ...Interface) Interface {
 	if len(sets) == 0 {
-		return NewHashSet()
+		return NewNativeSet()
 	}
 
 	newSet := sets[0].Copy()
