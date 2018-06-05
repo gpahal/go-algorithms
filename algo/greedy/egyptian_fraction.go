@@ -1,9 +1,9 @@
 package greedy
 
-// EgyptianFraction takes a positive fraction (num = numerator and den = denominator) less than 1 and returns
-// it's representation as a sum of unique unit fractions. A fraction is a unit fraction if it's numerator is 1 and
-// denominator is a positive integer. This function returns a slice representing the denominators of such a
-// representation in increasing order.
+// EgyptianFraction takes a positive fraction (num = numerator and den = denominator) less than 1
+// and returns it's representation as a sum of unique unit fractions. A fraction is a unit fraction
+// if it's numerator is 1 and denominator is a positive integer. This function returns a slice
+// representing the denominators of such a representation in increasing order.
 //
 // # Example
 //

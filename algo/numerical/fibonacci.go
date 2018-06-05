@@ -14,8 +14,8 @@ func Fibonacci(n int) int {
 	// prev stores the previous fibonacci value. Initially prev = Fibonacci(1).
 	prev := 1
 
-	// Apply the Fibonacci formula (ie. F(k-1), F(k) = F(k), F(k-1) + F(k)) n-1 times on pprev and prev to get
-	// Fibonacci(n).
+	// Apply the Fibonacci formula (ie. F(k-1), F(k) = F(k), F(k-1) + F(k)) n-1 times on pprev and
+	// prev to get Fibonacci(n).
 	for i := n - 1; i > 0; i-- {
 		pprev, prev = prev, pprev+prev
 	}

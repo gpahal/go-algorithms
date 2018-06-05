@@ -1,13 +1,13 @@
 package searching
 
-// BinarySearch searches the sorted slice arr for the key using the binary search algorithm. If the key is not found,
-// -1 is returned.
+// BinarySearch searches the sorted slice arr for the key using the binary search algorithm. If the
+// key is not found, -1 is returned.
 func BinarySearch(arr []int, key int) int {
 	return binarySearchHelper(arr, key, 0)
 }
 
-// binarySearchHelper searches the sorted slice arr for the key using the binary search algorithm and adds offset
-// idxToBeAdded to the resulting index. If the key is not found, -1 is returned.
+// binarySearchHelper searches the sorted slice arr for the key using the binary search algorithm
+// and adds offset idxToBeAdded to the resulting index. If the key is not found, -1 is returned.
 func binarySearchHelper(arr []int, key int, idxToBeAdded int) int {
 	arrLength := len(arr)
 	if arrLength == 0 {

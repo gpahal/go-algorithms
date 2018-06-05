@@ -23,7 +23,8 @@ func InsertionSort(arr []int) {
 			j--
 		}
 
-		// Check if any elements have actually moved. If yes, place the current element in the correct position.
+		// Check if any elements have actually moved. If yes, place the current element in the
+		// correct position.
 		if j != i-1 {
 			arr[j+1] = currVal
 		}

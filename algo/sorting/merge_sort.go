@@ -27,13 +27,14 @@ func MergeSortIterative(arr []int) {
 		return
 	}
 
-	// Merge sorted slices bottom up, starting from single element slices and doubling the size in each iteration.
+	// Merge sorted slices bottom up, starting from single element slices and doubling the size in
+	// each iteration.
 	currSize := 1
 	for currSize < arrLength {
 		doubleCurrSize := currSize * 2
 
-		// Loop over the whole slice in steps of doubleCurrSize and merge the two consecutive sorted slices of size
-		// currSize.
+		// Loop over the whole slice in steps of doubleCurrSize and merge the two consecutive
+		// sorted slices of size currSize.
 		for startIdx := 0; startIdx+currSize < arrLength; startIdx += doubleCurrSize {
 			endIdxExtended := startIdx + doubleCurrSize
 			if endIdxExtended > arrLength {
@@ -60,7 +61,8 @@ func merge(arr []int, mid int) {
 	tmpArr := make([]int, mid)
 	copy(tmpArr, arr[:mid])
 
-	// Merge the two slices, incrementally taking the smallest element among the smallest of the two slices.
+	// Merge the two slices, incrementally taking the smallest element among the smallest of the
+	// two slices.
 	idx, left, right := 0, 0, mid
 	for {
 		if tmpArr[left] <= arr[right] {

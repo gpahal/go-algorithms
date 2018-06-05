@@ -66,7 +66,7 @@ func (s *ListStack) Copy() Interface {
 		return false
 	})
 
-	// reverse the values slice
+	// Reverse the values slice.
 	for i, j := 0, len(arr)-1; i < j; i, j = i+1, j-1 {
 		arr[i], arr[j] = arr[j], arr[i]
 	}

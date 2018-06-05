@@ -15,7 +15,8 @@ func GCD(a, b int) int {
 		a, b = b, a
 	}
 
-	// While the remainder b is not 0, continue updating a and b according to the basic Euclidean algorithm.
+	// While the remainder b is not 0, continue updating a and b according to the basic Euclidean
+	// algorithm.
 	for b != 0 {
 		a, b = b, a%b
 	}
@@ -23,8 +24,8 @@ func GCD(a, b int) int {
 	return a
 }
 
-// GCDArray returns the greatest common divisor of all the elements in arr using the basic Euclidean algorithm. If arr
-// is nil or empty, 0 is returned.
+// GCDArray returns the greatest common divisor of all the elements in arr using the basic
+// Euclidean algorithm. If arr is nil or empty, 0 is returned.
 func GCDArray(arr []int) int {
 	arrLen := len(arr)
 	if arrLen == 0 {
@@ -37,7 +38,8 @@ func GCDArray(arr []int) int {
 	// ans stores the gcd of elements arr[:i].
 	ans := arr[0]
 
-	// Loop from i = 1 to arrLength - 1 and continue updating ans by applying Euclidean algorithm on ans and arr[i].
+	// Loop from i = 1 to arrLength - 1 and continue updating ans by applying Euclidean algorithm
+	// on ans and arr[i].
 	for i := 1; i < arrLen; i++ {
 		// If any element is 0, gcd is also 0.
 		if ans == 0 {

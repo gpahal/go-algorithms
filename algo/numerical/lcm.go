@@ -14,7 +14,8 @@ func LCM(a, b int) int {
 	return int((a * b) / GCD(a, b))
 }
 
-// LCMArray returns the least common multiple of all the elements in arr. If arr is nil or empty, 0 is returned.
+// LCMArray returns the least common multiple of all the elements in arr. If arr is nil or empty,
+// 0 is returned.
 func LCMArray(arr []int) int {
 	arrLen := len(arr)
 	if arrLen == 0 {

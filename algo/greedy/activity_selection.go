@@ -2,10 +2,10 @@ package greedy
 
 import "sort"
 
-// ActivitySelection takes a list of activities an 2-element array of start time and finish time selects the
-// maximum number of activities that can be performed by a single person, assuming that a person can only work on a
-// single activity at a time. If activities are not in the correct format (0 <= start time < finish time), nil is
-// returned.
+// ActivitySelection takes a list of activities an 2-element array of start time and finish time
+// selects the maximum number of activities that can be performed by a single person, assuming that
+// a person can only work on a single activity at a time. If activities are not in the correct
+// format (0 <= start time < finish time), nil is returned.
 func ActivitySelection(activities [][2]int, verifyActivities bool) [][2]int {
 	if len(activities) == 0 {
 		return [][2]int{}

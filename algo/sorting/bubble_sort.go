@@ -12,7 +12,8 @@ func BubbleSort(arr []int) {
 		// Counter of the number of swaps done in the current iteration.
 		swaps := 0
 
-		// Loop arrLength-1 times over all pairs of consecutive elements and swap in not in the correct order.
+		// Loop arrLength-1 times over all pairs of consecutive elements and swap in not in the
+		// correct order.
 		for i := 0; i < arrLength-1; i++ {
 			if arr[i] > arr[i+1] {
 				arr[i], arr[i+1] = arr[i+1], arr[i]

@@ -1,7 +1,8 @@
 package numerical
 
-// SieveOfEratosthenes finds all prime numbers up to any given limit. It returns a bool slice of length `limit` and its
-// nth index is true if n is NOT a prime and false if it is. 0 and 1 are not primes.
+// SieveOfEratosthenes finds all prime numbers up to any given limit. It returns a bool slice of
+// length `limit` and its nth index is true if n is NOT a prime and false if it is. 0 and 1 are not
+// primes.
 //
 // NOTE: limit should be > 0 and <= 2 ^ 24 (around 16.7 million), otherwise nil is returned.
 func SieveOfEratosthenes(limit int) []bool {
@@ -10,7 +11,8 @@ func SieveOfEratosthenes(limit int) []bool {
 		return nil
 	}
 
-	// sieve is the slice that stores primality values. By default, all numbers are prime ie. false.
+	// sieve is the slice that stores primality values. By default, all numbers are prime ie.
+	// false.
 	sieve := make([]bool, limit+1)
 
 	// Marks 0 and 1 as NOT prime.
@@ -22,12 +24,13 @@ func SieveOfEratosthenes(limit int) []bool {
 		sieve[m] = true
 	}
 
-	// Loop over all odd numbers starting from 3. 2 is being treated as a special case as it is the only prime that is
-	// even. This allows us to skip all even numbers in the loop.
+	// Loop over all odd numbers starting from 3. 2 is being treated as a special case as it is the
+	// only prime that is even. This allows us to skip all even numbers in the loop.
 	for p := 3; p <= limit; p += 2 {
 		if !sieve[p] {
-			// Mark numbers p(p), p(p+2), p(p+4), ... as composite or not prime. NOTE: p+1, p+3 are even and hence
-			// p(p+1), p(p+3), ... have already been marked as they are multiples of 2.
+			// Mark numbers p(p), p(p+2), p(p+4), ... as composite or not prime. NOTE: p+1, p+3 are
+			// even and hence p(p+1), p(p+3), ... have already been marked as they are multiples of
+			// 2.
 			for m := p * p; m <= limit; m += 2 * p {
 				sieve[m] = true
 			}
@@ -37,9 +40,9 @@ func SieveOfEratosthenes(limit int) []bool {
 	return sieve
 }
 
-// SieveOfEratosthenesDynamic returns a generator function which when called the nth time returns the nth prime number.
-// Unlike the normal SieveOfEratosthenes function, this function does not allocate a huge slice at initialization.
-// That is why it is has the word dynamic in its name.
+// SieveOfEratosthenesDynamic returns a generator function which when called the nth time returns
+// the nth prime number. Unlike the normal SieveOfEratosthenes function, this function does not
+// allocate a huge slice at initialization. That is why it is has the word dynamic in its name.
 func SieveOfEratosthenesDynamic() func() int {
 	// composites is a temporary map of composites (only odd numbers) to their factors.
 	composites := make(map[int][]int)
@@ -69,12 +72,12 @@ func SieveOfEratosthenesDynamic() func() int {
 		var factorMultiple int
 		var tmpFactors []int
 
-		// Increment by 2 to analyze the next potential prime number. As p >= 3 here, even numbers cannot be prime,
-		// thus, we are incrementing by 2.
+		// Increment by 2 to analyze the next potential prime number. As p >= 3 here, even numbers
+		// cannot be prime, thus, we are incrementing by 2.
 		p += 2
 		for {
-			// If current p is not composite => p is prime. This will be returned in the next invocation of the
-			// generator function.
+			// If current p is not composite => p is prime. This will be returned in the next
+			// invocation of the generator function.
 			factors, ok = composites[p]
 			if !ok {
 				break
@@ -82,9 +85,10 @@ func SieveOfEratosthenesDynamic() func() int {
 
 			// Loop over all the factors of composite p.
 			for _, factor := range factors {
-				// Append factor as a factor of p + 2*factor. NOTE: p + factor, p + 3*factor, ... are even and are not
-				// analyzed at all. NOTE: When we analyze p + 2*factor, we will ultimately also analyze p + 4*factor
-				// and hence only one number ie. p + 2*factor is added as a composite in this step.
+				// Append factor as a factor of p + 2*factor. NOTE: p + factor, p + 3*factor, ...
+				// are even and are not analyzed at all. NOTE: When we analyze p + 2*factor, we
+				// will ultimately also analyze p + 4*factor and hence only one number ie.
+				// p + 2*factor is added as a composite in this step.
 				factorMultiple = p + 2*factor
 				tmpFactors, ok = composites[factorMultiple]
 				if ok {
