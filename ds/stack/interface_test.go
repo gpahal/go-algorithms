@@ -99,6 +99,8 @@ func testInterfaceHelper(t *testing.T, newFn func(items ...int) stack.Interface)
 }
 
 func assertStackValues(t *testing.T, name string, s stack.Interface, expected []int) {
+	t.Helper()
+
 	var got []int
 	for {
 		val, ok := s.Pop()

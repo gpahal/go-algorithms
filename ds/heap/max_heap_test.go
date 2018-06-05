@@ -149,6 +149,8 @@ func TestMaxHeap_Copy(t *testing.T) {
 }
 
 func assertMaxHeap(t *testing.T, name string, h *heap.MaxHeap, expected []int) {
+	t.Helper()
+
 	var got []int
 	for {
 		val, ok := h.ExtractMax()

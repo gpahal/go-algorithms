@@ -14,6 +14,8 @@ func init() {
 }
 
 func assertSearchFn(t *testing.T, name string, fn func([]int, int) int, sort bool) bool {
+	t.Helper()
+
 	for i := 0; i < 10; i += 1 {
 		length := (rand.Int() % 20) + 1
 		arr := generateRandSlice(length, false)

@@ -149,6 +149,8 @@ func TestMinHeap_Copy(t *testing.T) {
 }
 
 func assertMinHeap(t *testing.T, name string, h *heap.MinHeap, expected []int) {
+	t.Helper()
+
 	var got []int
 	for {
 		val, ok := h.ExtractMin()

@@ -288,15 +288,14 @@ func TestSymmetricDifference(t *testing.T) {
 }
 
 func assertSetValues(t *testing.T, name string, s set.Interface, expected map[int]struct{}) {
+	t.Helper()
+
 	m := make(map[int]struct{}, s.Len())
 	s.Each(func(item int) bool {
 		m[item] = struct{}{}
 		return false
 	})
 
-	if s.Len() != len(expected) {
-		t.Errorf("%s: expected Set values to be %v, got %v", name, expected, m)
-	}
 	if !mapsEqual(m, expected) {
 		t.Errorf("%s: expected Set values to be %v, got %v", name, expected, m)
 	}

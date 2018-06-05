@@ -98,6 +98,8 @@ func testInterfaceHelper(t *testing.T, newFn func(items ...int) queue.Interface)
 }
 
 func assertQueueValues(t *testing.T, name string, q queue.Interface, expected []int) {
+	t.Helper()
+
 	var got []int
 	for {
 		val, ok := q.Dequeue()

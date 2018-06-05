@@ -13,6 +13,8 @@ func init() {
 }
 
 func assertSortFn(t *testing.T, name string, fn func([]int)) bool {
+	t.Helper()
+
 	for i := 0; i < 10; i += 1 {
 		length := (rand.Int() % 20) + 1
 		original := generateRandSlice(length)
