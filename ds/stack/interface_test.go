@@ -43,8 +43,8 @@ func testInterfaceHelper(t *testing.T, newFn func(items ...int) stack.Interface)
 	t.Run("Clear", func(t *testing.T) {
 		newStack := newFn(4, 5, 6)
 		newStack.Clear()
-		if newStack.Len() != 0 {
-			t.Errorf("Clear: expected Len to be 0, got %d", newStack.Len())
+		if !newStack.Empty() {
+			t.Errorf("Clear: expected Empty to be true, got false")
 		}
 	})
 

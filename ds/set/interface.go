@@ -11,14 +11,14 @@ type Interface interface {
 	// Clear deletes all the items from the set.
 	Clear()
 
+	// Contains checks whether the set contains all the given items.
+	Contains(items ...int) bool
+
 	// Each iterates over the items of the set.
 	Each(fn func(int) bool)
 
 	// Iterator returns a set.Iterable that can be used to iterate over the set.
 	Iterator() Iterable
-
-	// Contains checks whether the set contains all the given items.
-	Contains(items ...int) bool
 
 	// Add adds the given items to the set.
 	Add(items ...int)

@@ -43,8 +43,8 @@ func testInterfaceHelper(t *testing.T, newFn func(items ...int) set.Interface) {
 	t.Run("Clear", func(t *testing.T) {
 		newSet := newFn(4, 5, 6)
 		newSet.Clear()
-		if newSet.Len() != 0 {
-			t.Errorf("Clear: expected Len to be 0, got %d", newSet.Len())
+		if !newSet.Empty() {
+			t.Errorf("Clear: expected Empty to be true, got false")
 		}
 	})
 
@@ -297,7 +297,6 @@ func assertSetValues(t *testing.T, name string, s set.Interface, expected map[in
 	if s.Len() != len(expected) {
 		t.Errorf("%s: expected Set values to be %v, got %v", name, expected, m)
 	}
-
 	if !mapsEqual(m, expected) {
 		t.Errorf("%s: expected Set values to be %v, got %v", name, expected, m)
 	}

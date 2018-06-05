@@ -27,23 +27,6 @@ func (s *NativeSet) Clear() {
 	s.m = nil
 }
 
-// Each iterates over the items of the set.
-func (s *NativeSet) Each(fn func(int) bool) {
-	for item := range s.m {
-		if fn(item) {
-			break
-		}
-	}
-}
-
-// Iterator returns a set.Iterable that can be used to iterate over the set.
-func (s *NativeSet) Iterator() Iterable {
-	return &nativeSetIterable{
-		values:     s.values(),
-		currentIdx: -1,
-	}
-}
-
 // Contains checks whether the set contains all the given items.
 func (s *NativeSet) Contains(items ...int) bool {
 	if len(items) == 0 {
@@ -61,6 +44,23 @@ func (s *NativeSet) Contains(items ...int) bool {
 	}
 
 	return true
+}
+
+// Each iterates over the items of the set.
+func (s *NativeSet) Each(fn func(int) bool) {
+	for item := range s.m {
+		if fn(item) {
+			break
+		}
+	}
+}
+
+// Iterator returns a set.Iterable that can be used to iterate over the set.
+func (s *NativeSet) Iterator() Iterable {
+	return &nativeSetIterable{
+		values:     s.values(),
+		currentIdx: -1,
+	}
 }
 
 // Add adds the given items to the set.
@@ -99,6 +99,7 @@ func (s *NativeSet) Copy() Interface {
 	return &NativeSet{m: m}
 }
 
+// values returns a slice of the items of the set.
 func (s *NativeSet) values() []int {
 	items := make([]int, len(s.m))
 	idx := 0

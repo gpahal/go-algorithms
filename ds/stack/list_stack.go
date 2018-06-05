@@ -60,7 +60,11 @@ func (s *ListStack) Pop() (int, bool) {
 
 // Copy creates a new copy of the stack.
 func (s *ListStack) Copy() Interface {
-	arr := s.l.Values()
+	var arr []int
+	s.l.Each(func(item int) bool {
+		arr = append(arr, item)
+		return false
+	})
 
 	// reverse the values slice
 	for i, j := 0, len(arr)-1; i < j; i, j = i+1, j-1 {

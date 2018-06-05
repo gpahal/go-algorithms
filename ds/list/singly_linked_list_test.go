@@ -6,14 +6,6 @@ import (
 	"github.com/gpahal/go-algorithms/ds/list"
 )
 
-func TestNewSinglyLinkedList(t *testing.T) {
-	newList := list.NewSinglyLinkedList(4, 5, 6)
-	if newList.Len() != 3 {
-		t.Errorf("NewSinglyLinkedList 4, 5, 6: expected Len to be 3, got %d", newList.Len())
-	}
-	if !newList.Contains(4, 5, 6) {
-		t.Error("NewSinglyLinkedList 4, 5, 6: expected Contains to be true, got false")
-	}
-
-	testInterfaceHelper(list.NewSinglyLinkedList, t)
+func TestSinglyLinkedList(t *testing.T) {
+	testInterfaceHelper(t, list.NewSinglyLinkedList)
 }

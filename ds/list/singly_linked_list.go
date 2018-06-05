@@ -1,15 +1,22 @@
 package list
 
+// SinglyLinkedList represents a list instance implemented as a singly linked list. The Prev field
+// of every is nil.
 type SinglyLinkedList struct {
 	head *Element
 }
 
+// NewSinglyLinkedList returns a new singly linked list instance with the given items inserted in
+// order.
 func NewSinglyLinkedList(items ...int) Interface {
 	newList := &SinglyLinkedList{}
-	newList.PushBack(items...)
+	for i := len(items) - 1; i >= 0; i-- {
+		newList.PushFront(items[i])
+	}
 	return newList
 }
 
+// Len returns the number of items in the list.
 func (sll *SinglyLinkedList) Len() int {
 	if sll.head == nil {
 		return 0
@@ -23,49 +30,22 @@ func (sll *SinglyLinkedList) Len() int {
 	return count
 }
 
+// Empty checks whether the list is empty.
 func (sll *SinglyLinkedList) Empty() bool {
 	return sll.head == nil
 }
 
+// Clear deletes all the items from the list.
 func (sll *SinglyLinkedList) Clear() {
 	sll.head = nil
 }
 
-func (sll *SinglyLinkedList) Values() []int {
-	if sll.head == nil {
-		return []int{}
-	}
-
-	items := make([]int, 0)
-	for curr := sll.head; curr != nil; curr = curr.Next {
-		items = append(items, curr.Value)
-	}
-
-	return items
-}
-
-func (sll *SinglyLinkedList) Each(fn func(int) bool) {
-	if sll.head == nil {
-		return
-	}
-
-	for curr := sll.head; curr != nil; curr = curr.Next {
-		if fn(curr.Value) {
-			break
-		}
-	}
-}
-
-func (sll *SinglyLinkedList) Iterator() Iterable {
-	return &singlyLinkedListIterable{
-		curr: sll.head,
-	}
-}
-
+// First returns the first element of the list.
 func (sll *SinglyLinkedList) First() *Element {
 	return sll.head
 }
 
+// Last returns the last element of the list.
 func (sll *SinglyLinkedList) Last() *Element {
 	if sll.head == nil {
 		return nil
@@ -78,6 +58,7 @@ func (sll *SinglyLinkedList) Last() *Element {
 	return curr
 }
 
+// secondLast returns the second last element of the list.
 func (sll *SinglyLinkedList) secondLast() *Element {
 	if sll.head == nil || sll.head.Next == nil {
 		return nil
@@ -90,6 +71,8 @@ func (sll *SinglyLinkedList) secondLast() *Element {
 	return curr
 }
 
+// At returns the (i+1)th element of the list. Negative indices can also be used to find the (-i)th
+// last element.
 func (sll *SinglyLinkedList) At(i int) *Element {
 	if sll.head == nil {
 		return nil
@@ -119,6 +102,50 @@ func (sll *SinglyLinkedList) At(i int) *Element {
 	return nil
 }
 
+// Contains checks whether the list contains all the given items.
+func (sll *SinglyLinkedList) Contains(items ...int) bool {
+	if len(items) == 0 {
+		return true
+	}
+	if sll.head == nil {
+		return false
+	}
+
+	itemsMap := make(map[int]struct{}, len(items))
+	for _, item := range items {
+		itemsMap[item] = struct{}{}
+	}
+
+	for curr := sll.head; curr != nil; curr = curr.Next {
+		if _, ok := itemsMap[curr.Value]; ok {
+			delete(itemsMap, curr.Value)
+		}
+	}
+
+	return len(itemsMap) == 0
+}
+
+// Each iterates over the items of the list.
+func (sll *SinglyLinkedList) Each(fn func(int) bool) {
+	if sll.head == nil {
+		return
+	}
+
+	for curr := sll.head; curr != nil; curr = curr.Next {
+		if fn(curr.Value) {
+			break
+		}
+	}
+}
+
+// Iterator returns a list.Iterable that can be used to iterate over the list.
+func (sll *SinglyLinkedList) Iterator() Iterable {
+	return &singlyLinkedListIterable{
+		curr: sll.head,
+	}
+}
+
+// PushFront adds the given items at the start of the list.
 func (sll *SinglyLinkedList) PushFront(items ...int) {
 	if len(items) == 0 {
 		return
@@ -142,6 +169,8 @@ func (sll *SinglyLinkedList) PushFront(items ...int) {
 	sll.head = curr
 }
 
+// PopFront removes and returns the first element from the list. If the list is empty, it returns
+// nil.
 func (sll *SinglyLinkedList) PopFront() *Element {
 	if sll.head == nil {
 		return nil
@@ -153,6 +182,7 @@ func (sll *SinglyLinkedList) PopFront() *Element {
 	return removedEl
 }
 
+// PushBack adds the given items at the end of the list.
 func (sll *SinglyLinkedList) PushBack(items ...int) {
 	if len(items) == 0 {
 		return
@@ -181,6 +211,8 @@ func (sll *SinglyLinkedList) PushBack(items ...int) {
 	}
 }
 
+// PopBack removes and returns the last element from the list. If the list is empty, it returns
+// nil.
 func (sll *SinglyLinkedList) PopBack() *Element {
 	if sll.head == nil {
 		return nil
@@ -198,6 +230,9 @@ func (sll *SinglyLinkedList) PopBack() *Element {
 	return tail
 }
 
+// InsertAt adds the item as the (i+1)th element and returns the element. Negative indices can also
+// be used to insert after the (-i)th last element. If the list doesn't have enough elements, it
+// returns nil.
 func (sll *SinglyLinkedList) InsertAt(i int, item int) *Element {
 	if i < 0 {
 		if i == -1 {
@@ -219,6 +254,8 @@ func (sll *SinglyLinkedList) InsertAt(i int, item int) *Element {
 	return sll.InsertAfter(sll.At(i-1), item)
 }
 
+// InsertAfter adds the item after the given element and returns the inserted element. If inserting
+// after e is not possible, it returns nil.
 func (sll *SinglyLinkedList) InsertAfter(e *Element, item int) *Element {
 	if e == nil {
 		return nil
@@ -231,6 +268,8 @@ func (sll *SinglyLinkedList) InsertAfter(e *Element, item int) *Element {
 	return e.Next
 }
 
+// InsertBefore adds the item before the given element and returns the inserted element. If
+// inserting after e is not possible, it returns nil.
 func (sll *SinglyLinkedList) InsertBefore(e *Element, item int) *Element {
 	if e == nil || sll.head == nil {
 		return nil
@@ -251,6 +290,8 @@ func (sll *SinglyLinkedList) InsertBefore(e *Element, item int) *Element {
 	return sll.InsertAfter(curr, item)
 }
 
+// RemoveAt removes the (i+1)th element. Negative indices can also be used to remove the (-i)th
+// last element. If the list doesn't have enough elements, it returns nil.
 func (sll *SinglyLinkedList) RemoveAt(i int) *Element {
 	if i < 0 {
 		if i == -1 {
@@ -269,6 +310,7 @@ func (sll *SinglyLinkedList) RemoveAt(i int) *Element {
 	return sll.RemoveAfter(sll.At(i - 1))
 }
 
+// Remove removes and returns the given element. If removing e is not possible, it returns nil.
 func (sll *SinglyLinkedList) Remove(e *Element) *Element {
 	if e == nil || sll.head == nil {
 		return nil
@@ -288,6 +330,8 @@ func (sll *SinglyLinkedList) Remove(e *Element) *Element {
 	return sll.RemoveAfter(curr)
 }
 
+// RemoveAfter removes and returns the element after the given element. If removing after e is not
+// possible, it returns nil.
 func (sll *SinglyLinkedList) RemoveAfter(e *Element) *Element {
 	if e == nil || e.Next == nil {
 		return nil
@@ -299,6 +343,8 @@ func (sll *SinglyLinkedList) RemoveAfter(e *Element) *Element {
 	return removedEl
 }
 
+// RemoveBefore removes and returns the element before the given element. If removing before e is
+// not possible, it returns nil.
 func (sll *SinglyLinkedList) RemoveBefore(e *Element) *Element {
 	if e == nil || e == sll.head || sll.head == nil || sll.head.Next == nil {
 		return nil
@@ -318,6 +364,8 @@ func (sll *SinglyLinkedList) RemoveBefore(e *Element) *Element {
 	return sll.RemoveAfter(curr)
 }
 
+// DeleteFirst deletes the first occurrence of the given items from the list. If the same item is
+// passed twice as an argument, only one occurrence is deleted in total.
 func (sll *SinglyLinkedList) DeleteFirst(items ...int) {
 	if len(items) == 0 || sll.head == nil {
 		return
@@ -349,6 +397,7 @@ func (sll *SinglyLinkedList) DeleteFirst(items ...int) {
 	}
 }
 
+// Delete deletes the all occurrences of the given items from the list.
 func (sll *SinglyLinkedList) Delete(items ...int) {
 	if len(items) == 0 || sll.head == nil {
 		return
@@ -375,30 +424,18 @@ func (sll *SinglyLinkedList) Delete(items ...int) {
 	}
 }
 
-func (sll *SinglyLinkedList) Contains(items ...int) bool {
-	if len(items) == 0 {
-		return true
-	}
-	if sll.head == nil {
-		return false
-	}
-
-	itemsMap := make(map[int]struct{}, len(items))
-	for _, item := range items {
-		itemsMap[item] = struct{}{}
-	}
-
-	for curr := sll.head; curr != nil; curr = curr.Next {
-		if _, ok := itemsMap[curr.Value]; ok {
-			delete(itemsMap, curr.Value)
-		}
-	}
-
-	return len(itemsMap) == 0
-}
-
+// Copy creates a new copy of the list.
 func (sll *SinglyLinkedList) Copy() Interface {
-	return NewSinglyLinkedList(sll.Values()...)
+	if sll.head == nil {
+		return NewSinglyLinkedList()
+	}
+
+	var arr []int
+	for curr := sll.head; curr != nil; curr = curr.Next {
+		arr = append(arr, curr.Value)
+	}
+
+	return NewSinglyLinkedList(arr...)
 }
 
 type singlyLinkedListIterable struct {

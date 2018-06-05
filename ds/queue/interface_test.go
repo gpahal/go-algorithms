@@ -43,17 +43,16 @@ func testInterfaceHelper(t *testing.T, newFn func(items ...int) queue.Interface)
 	t.Run("Clear", func(t *testing.T) {
 		newQueue := newFn(4, 5, 6)
 		newQueue.Clear()
-		if newQueue.Len() != 0 {
-			t.Errorf("Clear: expected Len to be 0, got %d", newQueue.Len())
+		if !newQueue.Empty() {
+			t.Errorf("Clear: expected Empty to be true, got false", newQueue.Len())
 		}
 	})
 
 	t.Run("Front", func(t *testing.T) {
-		newQueue := newFn(4, 5, 6)
-		newQueue.Enqueue(7)
+		newQueue := newFn(4, 5, 6, 7)
 		val, ok := newQueue.Front()
 		if !ok || val != 4 {
-			t.Errorf("Frint: expected Front to return (4, true), got (%d, %t)", val, ok)
+			t.Errorf("Front: expected Front to return (4, true), got (%d, %t)", val, ok)
 		}
 
 		assertQueueValues(t, "Front", newQueue, []int{4, 5, 6, 7})

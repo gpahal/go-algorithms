@@ -60,5 +60,11 @@ func (q *ListQueue) Dequeue() (int, bool) {
 
 // Copy creates a new copy of the queue.
 func (q *ListQueue) Copy() Interface {
-	return NewListQueue(q.l.Values()...)
+	var arr []int
+	q.l.Each(func(item int) bool {
+		arr = append(arr, item)
+		return false
+	})
+
+	return NewListQueue(arr...)
 }
