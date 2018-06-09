@@ -38,6 +38,17 @@ func (g *Graph) Len() int {
 	return len(g.nodes)
 }
 
+// Empty checks whether the graph is empty.
+func (g *Graph) Empty() bool {
+	return len(g.nodes) == 0
+}
+
+// Clear deletes all the items from the graph.
+func (g *Graph) Clear() {
+	*g = *New()
+	return
+}
+
 // Node returns the node with the given id. If such a node doesn't exist, nil is returned.
 func (g *Graph) Node(id int) *Node {
 	val, ok := g.nodes[id]
