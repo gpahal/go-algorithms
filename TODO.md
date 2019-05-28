@@ -1,6 +1,7 @@
 # TODO list
 
 ## Algorithms
+
 - More Dynamic Programming examples
 - More Greedy Programming examples
 - More numerical algorithms (linear algebra etc.)
@@ -8,6 +9,7 @@
 - Image manipulation algorithms (Delaunay triangulation etc.)
 
 ## Data Structures
+
 - Trees (Binary Tree, Red-Black Tree, etc.)
 - Graphs and related algorithms (probably both adjacency list and matrix
   based)
@@ -15,7 +17,12 @@
 - Hash table (simple implementation - should use map instead of this
   while implementing other algorithms and data structures)
 
+## Design Patterns
+
+- Concurrency patterns
+
 ## Documentation
+
 - Use GoDoc comments for all structs, interfaces and functions
 - Provide examples in the comments
 - Comment the various steps used in an algorithm, time complexity, space
