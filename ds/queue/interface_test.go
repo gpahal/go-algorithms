@@ -44,7 +44,7 @@ func testInterfaceHelper(t *testing.T, newFn func(items ...int) queue.Interface)
 		newQueue := newFn(4, 5, 6)
 		newQueue.Clear()
 		if !newQueue.Empty() {
-			t.Errorf("Clear: expected Empty to be true, got false", newQueue.Len())
+			t.Error("Clear: expected Empty to be true, got false")
 		}
 	})
 
