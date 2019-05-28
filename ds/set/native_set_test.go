@@ -3,7 +3,7 @@ package set_test
 import (
 	"testing"
 
-	"github.com/gpahal/go-algorithms/ds/set"
+	"github.com/gpahal/golib/ds/set"
 )
 
 func TestNewNativeSet(t *testing.T) {

@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/gpahal/go-algorithms/algo/searching"
-	"github.com/gpahal/go-algorithms/algo/sorting"
+	"github.com/gpahal/golib/algo/searching"
+	"github.com/gpahal/golib/algo/sorting"
 )
 
 func init() {

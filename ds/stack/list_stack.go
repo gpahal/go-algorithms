@@ -1,7 +1,7 @@
 package stack
 
 import (
-	"github.com/gpahal/go-algorithms/ds/list"
+	"github.com/gpahal/golib/ds/list"
 )
 
 // ListStack represents a stack instance implemented as a singly linked list.

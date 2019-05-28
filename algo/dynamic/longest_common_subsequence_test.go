@@ -3,7 +3,7 @@ package dynamic_test
 import (
 	"testing"
 
-	"github.com/gpahal/go-algorithms/algo/dynamic"
+	"github.com/gpahal/golib/algo/dynamic"
 )
 
 func TestLongestCommonSubsequence(t *testing.T) {

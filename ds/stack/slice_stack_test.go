@@ -3,7 +3,7 @@ package stack_test
 import (
 	"testing"
 
-	"github.com/gpahal/go-algorithms/ds/stack"
+	"github.com/gpahal/golib/ds/stack"
 )
 
 func TestSliceStack(t *testing.T) {

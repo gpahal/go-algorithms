@@ -1,7 +1,7 @@
 package queue
 
 import (
-	"github.com/gpahal/go-algorithms/ds/list"
+	"github.com/gpahal/golib/ds/list"
 )
 
 // ListQueue represents a queue instance implemented as a singly linked list.

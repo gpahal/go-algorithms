@@ -3,7 +3,7 @@ package stack_test
 import (
 	"testing"
 
-	"github.com/gpahal/go-algorithms/ds/stack"
+	"github.com/gpahal/golib/ds/stack"
 )
 
 func TestListStack(t *testing.T) {

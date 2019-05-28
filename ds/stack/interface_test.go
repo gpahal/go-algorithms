@@ -3,7 +3,7 @@ package stack_test
 import (
 	"testing"
 
-	"github.com/gpahal/go-algorithms/ds/stack"
+	"github.com/gpahal/golib/ds/stack"
 )
 
 func testInterfaceHelper(t *testing.T, newFn func(items ...int) stack.Interface) {

@@ -3,7 +3,7 @@ package greedy_test
 import (
 	"testing"
 
-	"github.com/gpahal/go-algorithms/algo/greedy"
+	"github.com/gpahal/golib/algo/greedy"
 )
 
 func TestEgyptianFraction(t *testing.T) {

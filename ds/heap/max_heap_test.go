@@ -3,7 +3,7 @@ package heap_test
 import (
 	"testing"
 
-	"github.com/gpahal/go-algorithms/ds/heap"
+	"github.com/gpahal/golib/ds/heap"
 )
 
 func TestNewMaxHeap(t *testing.T) {

@@ -3,7 +3,7 @@ package queue_test
 import (
 	"testing"
 
-	"github.com/gpahal/go-algorithms/ds/queue"
+	"github.com/gpahal/golib/ds/queue"
 )
 
 func testInterfaceHelper(t *testing.T, newFn func(items ...int) queue.Interface) {

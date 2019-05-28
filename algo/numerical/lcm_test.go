@@ -3,7 +3,7 @@ package numerical_test
 import (
 	"testing"
 
-	"github.com/gpahal/go-algorithms/algo/numerical"
+	"github.com/gpahal/golib/algo/numerical"
 )
 
 func TestLCM(t *testing.T) {

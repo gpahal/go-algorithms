@@ -3,7 +3,7 @@ package list_test
 import (
 	"testing"
 
-	"github.com/gpahal/go-algorithms/ds/list"
+	"github.com/gpahal/golib/ds/list"
 )
 
 func testInterfaceHelper(t *testing.T, newFn func(...int) list.Interface) {

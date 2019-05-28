@@ -3,7 +3,7 @@ package graph_test
 import (
 	"testing"
 
-	"github.com/gpahal/go-algorithms/ds/graph"
+	"github.com/gpahal/golib/ds/graph"
 )
 
 func TestNew(t *testing.T) {
