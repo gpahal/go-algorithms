@@ -27,6 +27,9 @@ func testSingleMerge(t *testing.T, count []int) {
 	var wg sync.WaitGroup
 	wg.Add(len(count))
 
+	done := make(chan struct{})
+	defer close(done)
+
 	// Create input channels and store the values emitted by them for testing.
 	var mu sync.Mutex
 	m := make(map[int]int)
@@ -50,7 +53,7 @@ func testSingleMerge(t *testing.T, count []int) {
 		}(i, c)
 	}
 
-	out := concurrency.Merge(cs...)
+	out := concurrency.Merge(done, cs...)
 	arr := []int{}
 	for n := range out {
 		arr = append(arr, n)
