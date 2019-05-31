@@ -2,7 +2,7 @@ package concurrency
 
 import "sync"
 
-// FanIn multiplexes a list of channels onto a single channel that is closed when all input
+// Merge multiplexes a list of channels onto a single channel that is closed when all input
 // channels are closed. The ordering for a single channel is maintained but values coming from
 // different channels are not ordered in any way.
 //
@@ -16,10 +16,10 @@ import "sync"
 //         c2 <- 2
 //     }
 //
-//     for n := range concurrency.FanIn(c2, c2) {
+//     for n := range concurrency.Merge(c2, c2) {
 //         fmt.Println(n) // prints 1 and 2, or 2 and 1
 //     }
-func FanIn(cs ...<-chan int) <-chan int {
+func Merge(cs ...<-chan int) <-chan int {
 	out := make(chan int)
 
 	// A WaitGroup is used here to wait for len(cs) goroutines to terminate. These goroutines are

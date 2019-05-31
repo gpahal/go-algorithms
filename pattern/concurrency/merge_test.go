@@ -14,14 +14,14 @@ func init() {
 	rand.Seed(time.Now().UnixNano())
 }
 
-func TestFanIn(t *testing.T) {
+func TestMerge(t *testing.T) {
 	counts := [][]int{[]int{}, []int{0}, []int{0, 1}, []int{1, 0}, []int{3, 3, 3}}
 	for _, count := range counts {
-		testSingleFanIn(t, count)
+		testSingleMerge(t, count)
 	}
 }
 
-func testSingleFanIn(t *testing.T, count []int) {
+func testSingleMerge(t *testing.T, count []int) {
 	t.Helper()
 
 	var wg sync.WaitGroup
@@ -50,7 +50,7 @@ func testSingleFanIn(t *testing.T, count []int) {
 		}(i, c)
 	}
 
-	out := concurrency.FanIn(cs...)
+	out := concurrency.Merge(cs...)
 	arr := []int{}
 	for n := range out {
 		arr = append(arr, n)
@@ -63,7 +63,7 @@ func testSingleFanIn(t *testing.T, count []int) {
 		val, ok := m[n]
 		if !ok || val <= 0 {
 			t.Fatalf(
-				"FanIn %s: extra %d present at index %d in the output channel: (chan[%v])",
+				"Merge %s: extra %d present at index %d in the output channel: (chan[%v])",
 				getArgs(ns), n, i, arr)
 		}
 
@@ -73,7 +73,7 @@ func testSingleFanIn(t *testing.T, count []int) {
 	for n, val := range m {
 		if val > 0 {
 			t.Fatalf(
-				"FanIn %s: not enough %d present in the output channel: (chan[%v])",
+				"Merge %s: not enough %d present in the output channel: (chan[%v])",
 				getArgs(ns), n, arr)
 		}
 	}
