@@ -44,7 +44,7 @@ func testSingleMerge(t *testing.T, count []int) {
 				n := rand.Intn(100)
 				c <- n
 				mu.Lock()
-				incCounter(m, n)
+				incCounterMerge(m, n)
 				ns[i] = append(ns[i], n)
 				mu.Unlock()
 			}
@@ -67,7 +67,7 @@ func testSingleMerge(t *testing.T, count []int) {
 		if !ok || val <= 0 {
 			t.Fatalf(
 				"Merge %s: extra %d present at index %d in the output channel: (chan[%v])",
-				getArgs(ns), n, i, arr)
+				getArgsMerge(ns), n, i, arr)
 		}
 
 		m[n] = val - 1
@@ -77,12 +77,12 @@ func testSingleMerge(t *testing.T, count []int) {
 		if val > 0 {
 			t.Fatalf(
 				"Merge %s: not enough %d present in the output channel: (chan[%v])",
-				getArgs(ns), n, arr)
+				getArgsMerge(ns), n, arr)
 		}
 	}
 }
 
-func incCounter(m map[int]int, n int) {
+func incCounterMerge(m map[int]int, n int) {
 	val, ok := m[n]
 	if ok {
 		m[n] = val + 1
@@ -91,7 +91,7 @@ func incCounter(m map[int]int, n int) {
 	}
 }
 
-func getArgs(ns [][]int) string {
+func getArgsMerge(ns [][]int) string {
 	if len(ns) == 0 {
 		return "[no args]"
 	}
